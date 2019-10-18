@@ -1,9 +1,9 @@
 import React from 'react'
+import {IoMdSunny, IoLogoGithub, IoLogoTwitter} from 'react-icons/io'
 import styled from 'styled-components'
 
 import {Size} from '../const'
 import {useHasMounted, useDarkMode} from '../hooks'
-import {IoMdSunny, IoLogoGithub, IoLogoTwitter} from 'react-icons/io'
 
 export function Header(): JSX.Element {
   const {toggleDarkMode} = useDarkMode()
@@ -15,13 +15,19 @@ export function Header(): JSX.Element {
 
       <LinkList>
         <LinkItem>
-          <a href='https://github.com/dappface' target='_blank'>
+          <a
+            target='_blank'
+            rel='noopener noreferrer'
+            href='https://github.com/dappface'>
             <IoLogoGithub size={28} />
           </a>
         </LinkItem>
 
         <LinkItem>
-          <a href='https://twitter.com/dappface_com' target='_blank'>
+          <a
+            target='_blank'
+            rel='noopener noreferrer'
+            href='https://twitter.com/dappface_com'>
             <IoLogoTwitter size={28} />
           </a>
         </LinkItem>

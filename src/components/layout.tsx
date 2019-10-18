@@ -47,7 +47,8 @@ const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
       background: ${darkTheme.background};
       color: ${darkTheme.color};
     }
-    ${({hasMounted}) => (hasMounted ? 'transition: all 0.2s ease-out;' : '')}}
+    ${({hasMounted}): string =>
+      hasMounted ? 'transition: all 0.2s ease-out;' : ''}}
   }
 
   a, button, input[type="submit"], input[type="reset"] {
