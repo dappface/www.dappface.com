@@ -10,5 +10,6 @@ module.exports = {
   plugins: ['@typescript-eslint', 'prettier'],
   rules: {
     'react/jsx-filename-extension': {extensions: ['.tsx']},
+    'import/prefer-default-export': 'off',
   },
 }

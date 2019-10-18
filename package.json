@@ -7,15 +7,20 @@
     "build": "gatsby build",
     "lint": "eslint . --ext .js,.tsx,.ts",
     "start": "gatsby develop",
-    "serve": "gatsby serve"
+    "serve": "gatsby serve",
+    "typecheck": "tsc"
   },
   "dependencies": {
+    "babel-plugin-styled-components": "^1.10.6",
     "gatsby": "^2.16.1",
+    "gatsby-plugin-styled-components": "^3.1.11",
     "gatsby-plugin-typescript": "^2.1.15",
     "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "react-dom": "^16.10.2",
+    "styled-components": "^4.4.0"
   },
   "devDependencies": {
+    "@types/styled-components": "^4.1.19",
     "@typescript-eslint/eslint-plugin": "^2.4.0",
     "@typescript-eslint/parser": "^2.4.0",
     "eslint-config-airbnb": "^18.0.1",
