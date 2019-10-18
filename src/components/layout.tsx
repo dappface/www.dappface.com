@@ -31,6 +31,8 @@ interface GlobalStyleProps {
 }
 
 const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
+  @import url('https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab:300,400&display=swap');
+
   body {
     margin: 0;
 
@@ -66,6 +68,7 @@ const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  font-family: 'Roboto Mono', monospace;
 
   ${({hasMounted}): string =>
     hasMounted

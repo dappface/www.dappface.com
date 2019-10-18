@@ -1,10 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import {Color} from '../const'
+import {Color, Size} from '../const'
 import {useHasMounted, useDarkMode} from '../hooks'
-import sunDarkImage from '../../static/sun-dark.png'
-import sunLightImage from '../../static/sun-light.png'
 import {IoMdSunny} from 'react-icons/io'
 
 export function Header(): JSX.Element {
@@ -28,7 +26,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 90px;
-  padding: 0 25px;
+  padding: 0 ${Size.Margin24}px;
 `
 
 const Logo = styled.h1`
