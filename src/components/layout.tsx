@@ -72,7 +72,7 @@ const Container = styled.div<ContainerProps>`
       ? `
 
       button {
-        transition: all 0.2s ease-out;
+        transition: opacity 0.2s ease-out;
       }
   `
       : ''}
