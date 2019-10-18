@@ -8,11 +8,12 @@
     "lint": "eslint . --ext .js,.tsx,.ts",
     "start": "gatsby develop",
     "serve": "gatsby serve",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "upgrade-interactive": "npx npm-check --update"
   },
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.6",
-    "gatsby": "^2.16.1",
+    "gatsby": "^2.16.5",
     "gatsby-plugin-styled-components": "^3.1.11",
     "gatsby-plugin-typescript": "^2.1.15",
     "react": "^16.10.2",
