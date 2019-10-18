@@ -4,6 +4,7 @@ import styled, {createGlobalStyle} from 'styled-components'
 import {lightTheme, darkTheme} from '../const'
 import {ThemeModeContext, useHasMounted, useThemeMode} from '../hooks'
 import {Header} from './header'
+import {Footer} from './footer'
 
 interface Props {
   children: JSX.Element | JSX.Element[]
@@ -19,7 +20,8 @@ export function Layout({children}: Props): JSX.Element {
         <GlobalStyle hasMounted={hasMounted} />
         <Container hasMounted={hasMounted}>
           <Header />
-          {children}
+          <Main>{children}</Main>
+          <Footer />
         </Container>
       </>
     </ThemeModeContext.Provider>
@@ -58,6 +60,10 @@ const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
     outline: inherit;
     text-decoration: none;
   }
+
+  ul {
+    list-style-type: none;
+  }
 `
 
 interface ContainerProps {
@@ -88,4 +94,8 @@ const Container = styled.div<ContainerProps>`
       opacity: 0.7;
     }
   }
+`
+
+const Main = styled.main`
+  padding-bottom: 48px;
 `

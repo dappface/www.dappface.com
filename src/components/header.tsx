@@ -38,7 +38,7 @@ export function Header(): JSX.Element {
   )
 }
 
-const Container = styled.div`
+const Container = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -52,11 +52,11 @@ const Logo = styled.h1`
   font-weight: 300;
 `
 
-const LinkList = styled.div`
+const LinkList = styled.ul`
   display: flex;
   align-items: center;
 `
 
-const LinkItem = styled.div`
+const LinkItem = styled.li`
   padding: 0 ${Size.Margin16}px;
 `
