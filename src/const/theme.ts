@@ -22,6 +22,6 @@ export interface Theme {
 }
 
 export enum ThemeMode {
-  Light,
-  Dark,
+  Light = 'light',
+  Dark = 'dark',
 }

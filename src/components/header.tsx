@@ -1,15 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import {useToggleDarkMode} from '../hooks'
+import {useHasMounted, useToggleDarkMode} from '../hooks'
 
 export function Header(): JSX.Element {
   const toggleDarkMode = useToggleDarkMode()
+  const hasMounted = useHasMounted()
 
   return (
     <Container>
       <Logo>DAPPFACE</Logo>
-      <div onClick={toggleDarkMode}>button</div>
+      {hasMounted ? (
+        <button onClick={toggleDarkMode} type='button'>
+          button
+        </button>
+      ) : null}
     </Container>
   )
 }

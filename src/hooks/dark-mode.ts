@@ -1,10 +1,18 @@
-import {createContext, useCallback, useContext, useState} from 'react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import {ThemeMode} from '../const'
 
-export function useToggleDarkMode() {
+export function useToggleDarkMode(): () => void {
   const {mode, setMode} = useContext(ThemeModeContext) as ThemeModeContextValue
   const toggleDarkMode = useCallback(() => {
-    setMode(mode === ThemeMode.Dark ? ThemeMode.Light : ThemeMode.Dark)
+    const value = mode === ThemeMode.Dark ? ThemeMode.Light : ThemeMode.Dark
+    window.__setPreferredTheme(value)
+    setMode(value)
   }, [mode])
 
   return toggleDarkMode
@@ -20,11 +28,25 @@ export const ThemeModeContext = createContext<
 >(undefined)
 
 export function useThemeMode(): ThemeModeContextValue {
-  const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-  const [mode, setMode] = useState(isDark ? ThemeMode.Dark : ThemeMode.Light)
+  const [mode, setMode] = useState(ThemeMode.Light)
+
+  useEffect(() => {
+    setMode(window.__theme)
+    window.__onThemeChange = (): void => {
+      setMode(window.__theme)
+    }
+  }, [])
 
   return {
     mode,
     setMode,
+  }
+}
+
+declare global {
+  interface Window {
+    __theme: ThemeMode
+    __onThemeChange: () => void
+    __setPreferredTheme: (mode: ThemeMode) => void
   }
 }

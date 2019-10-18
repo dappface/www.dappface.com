@@ -11,5 +11,15 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': {extensions: ['.tsx']},
     'import/prefer-default-export': 'off',
+    'import/no-unresolved': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
+    'no-use-before-define': 'off',
+    'no-underscore-dangle': [
+      'off',
+      {allow: ['__theme', '__onThemeChange', '__setPreferredTheme']},
+    ],
+  },
+  globals: {
+    window: false,
   },
 }
