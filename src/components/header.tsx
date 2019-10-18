@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'gatsby'
 import {IoMdSunny, IoLogoGithub, IoLogoTwitter} from 'react-icons/io'
 import styled from 'styled-components'
 
@@ -11,7 +12,9 @@ export function Header(): JSX.Element {
 
   return (
     <Container>
-      <Logo>DAPPFACE</Logo>
+      <Link to='/'>
+        <Logo>DAPPFACE</Logo>
+      </Link>
 
       <LinkList>
         <LinkItem>
