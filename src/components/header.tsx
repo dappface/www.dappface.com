@@ -1,10 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import {useHasMounted, useToggleDarkMode} from '../hooks'
+import {Color} from '../const'
+import {useHasMounted, useDarkMode} from '../hooks'
+import sunDarkImage from '../../static/sun-dark.png'
+import sunLightImage from '../../static/sun-light.png'
+import {IoMdSunny} from 'react-icons/io'
 
 export function Header(): JSX.Element {
-  const toggleDarkMode = useToggleDarkMode()
+  const {isDarkMode, toggleDarkMode} = useDarkMode()
   const hasMounted = useHasMounted()
 
   return (
@@ -12,7 +16,7 @@ export function Header(): JSX.Element {
       <Logo>DAPPFACE</Logo>
       {hasMounted ? (
         <button onClick={toggleDarkMode} type='button'>
-          button
+          <IoMdSunny color={isDarkMode ? Color.White : Color.Black} size={28} />
         </button>
       ) : null}
     </Container>
@@ -28,7 +32,11 @@ const Container = styled.div`
 `
 
 const Logo = styled.h1`
-  font-size: 16px;
+  font-size: 24px;
   font-family: 'Roboto Slab', serif;
   font-weight: 300;
 `
+
+interface DarModeButtonProps {
+  image: string
+}

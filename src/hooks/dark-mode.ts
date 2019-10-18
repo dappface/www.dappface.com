@@ -7,15 +7,21 @@ import {
 } from 'react'
 import {ThemeMode} from '../const'
 
-export function useToggleDarkMode(): () => void {
+export function useDarkMode(): {
+  isDarkMode: boolean
+  toggleDarkMode: () => void
+} {
   const {mode, setMode} = useContext(ThemeModeContext) as ThemeModeContextValue
+
+  const isDarkMode = mode === ThemeMode.Dark
+
   const toggleDarkMode = useCallback(() => {
-    const value = mode === ThemeMode.Dark ? ThemeMode.Light : ThemeMode.Dark
+    const value = isDarkMode ? ThemeMode.Light : ThemeMode.Dark
     window.__setPreferredTheme(value)
     setMode(value)
-  }, [mode])
+  }, [isDarkMode])
 
-  return toggleDarkMode
+  return {isDarkMode, toggleDarkMode}
 }
 
 interface ThemeModeContextValue {
