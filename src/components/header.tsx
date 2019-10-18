@@ -1,22 +1,39 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import {Color, Size} from '../const'
+import {Size} from '../const'
 import {useHasMounted, useDarkMode} from '../hooks'
-import {IoMdSunny} from 'react-icons/io'
+import {IoMdSunny, IoLogoGithub, IoLogoTwitter} from 'react-icons/io'
 
 export function Header(): JSX.Element {
-  const {isDarkMode, toggleDarkMode} = useDarkMode()
+  const {toggleDarkMode} = useDarkMode()
   const hasMounted = useHasMounted()
 
   return (
     <Container>
       <Logo>DAPPFACE</Logo>
-      {hasMounted ? (
-        <button onClick={toggleDarkMode} type='button'>
-          <IoMdSunny color={isDarkMode ? Color.White : Color.Black} size={28} />
-        </button>
-      ) : null}
+
+      <LinkList>
+        <LinkItem>
+          <a href='https://github.com/dappface' target='_blank'>
+            <IoLogoGithub size={28} />
+          </a>
+        </LinkItem>
+
+        <LinkItem>
+          <a href='https://twitter.com/dappface_com' target='_blank'>
+            <IoLogoTwitter size={28} />
+          </a>
+        </LinkItem>
+
+        {hasMounted ? (
+          <LinkItem>
+            <button onClick={toggleDarkMode} type='button'>
+              <IoMdSunny size={28} />
+            </button>
+          </LinkItem>
+        ) : null}
+      </LinkList>
     </Container>
   )
 }
@@ -35,6 +52,11 @@ const Logo = styled.h1`
   font-weight: 300;
 `
 
-interface DarModeButtonProps {
-  image: string
-}
+const LinkList = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const LinkItem = styled.div`
+  padding: 0 ${Size.Margin16}px;
+`

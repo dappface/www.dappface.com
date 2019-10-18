@@ -48,7 +48,7 @@ const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
     ${({hasMounted}) => (hasMounted ? 'transition: all 0.2s ease-out;' : '')}}
   }
 
-  button, input[type="submit"], input[type="reset"] {
+  a, button, input[type="submit"], input[type="reset"] {
     background: none;
     color: inherit;
     border: none;
@@ -56,6 +56,7 @@ const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
     font: inherit;
     cursor: pointer;
     outline: inherit;
+    text-decoration: none;
   }
 `
 
@@ -74,13 +75,13 @@ const Container = styled.div<ContainerProps>`
     hasMounted
       ? `
 
-      button {
+      a, button {
         transition: opacity 0.2s ease-out;
       }
   `
       : ''}
 
-  button {
+  a, button {
     cursor: pointer;
 
     &:hover {
