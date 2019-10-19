@@ -22,7 +22,7 @@ export function Layout({children}: Props): JSX.Element {
         <GlobalStyle hasMounted={hasMounted} />
         <Container hasMounted={hasMounted}>
           <Header />
-          <Main>{children}</Main>
+          {children}
           <Footer />
         </Container>
       </>
@@ -97,8 +97,4 @@ const Container = styled.div<ContainerProps>`
       opacity: 0.7;
     }
   }
-`
-
-const Main = styled.main`
-  padding-bottom: 48px;
 `
