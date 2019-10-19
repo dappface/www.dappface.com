@@ -5,6 +5,7 @@ import {lightTheme, darkTheme} from '../const'
 import {ThemeModeContext, useHasMounted, useThemeMode} from '../hooks'
 import {Header} from './header'
 import {Footer} from './footer'
+import {SEO} from './seo'
 
 interface Props {
   children: JSX.Element | JSX.Element[]
@@ -17,6 +18,7 @@ export function Layout({children}: Props): JSX.Element {
   return (
     <ThemeModeContext.Provider value={themeMode}>
       <>
+        <SEO />
         <GlobalStyle hasMounted={hasMounted} />
         <Container hasMounted={hasMounted}>
           <Header />

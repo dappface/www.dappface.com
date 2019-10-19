@@ -1,8 +1,12 @@
 module.exports = {
   siteMetadata: {
     title: 'DAPPFACE',
-    siteUrl: `https://www.dappface.com`,
     description: 'Open Source Web3 Mobile Browser',
+    image: 'static/icon-512x512.png',
+    url: 'https://www.dappface.com',
+    twitter: {
+      username: '@dappface_com',
+    },
   },
   plugins: [
     {
@@ -66,5 +70,6 @@ module.exports = {
       },
     },
     'gatsby-plugin-offline',
+    'gatsby-plugin-react-helmet',
   ],
 }

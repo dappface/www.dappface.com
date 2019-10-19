@@ -20,6 +20,6 @@ const Container = styled.footer`
 `
 
 const CopyRight = styled.p`
-  color: ${Color.Gray400};
+  color: ${Color.Gray500};
   font-size: ${Size.Font12}px;
 `

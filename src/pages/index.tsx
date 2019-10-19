@@ -14,6 +14,7 @@ export default function(): JSX.Element {
             width='420'
             height='315'
             frameBorder='0'
+            title='DAPPFACE demo'
             src='https://www.youtube.com/embed/89TFedIOfeY?autoplay=1&controls=0'
           />
         </PaddingHorizontal>

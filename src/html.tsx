@@ -51,10 +51,10 @@ export default function HTML(props: Props): JSX.Element {
 
                 var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
                 darkQuery.addListener(function(e) {
-                  window.__setPreferredTheme(e.matches ? ${ThemeMode.Dark} : ${ThemeMode.Light});
+                  window.__setPreferredTheme(e.matches ? '${ThemeMode.Dark}' : '${ThemeMode.Light}');
                 });
 
-                setTheme(preferredTheme || (darkQuery.matches ? ${ThemeMode.Dark} : ${ThemeMode.Light}));
+                setTheme(preferredTheme || (darkQuery.matches ? '${ThemeMode.Dark}' : '${ThemeMode.Light}'));
               })();
             `,
           }}

@@ -21,7 +21,8 @@ export function Header(): JSX.Element {
           <a
             target='_blank'
             rel='noopener noreferrer'
-            href='https://github.com/dappface'>
+            href='https://github.com/dappface'
+            aria-label='Go to GitHub Page'>
             <IoLogoGithub size={28} />
           </a>
         </LinkItem>
@@ -30,14 +31,18 @@ export function Header(): JSX.Element {
           <a
             target='_blank'
             rel='noopener noreferrer'
-            href='https://twitter.com/dappface_com'>
+            href='https://twitter.com/dappface_com'
+            aria-label='Go to Twitter Page'>
             <IoLogoTwitter size={28} />
           </a>
         </LinkItem>
 
         {hasMounted ? (
           <LinkItem>
-            <button onClick={toggleDarkMode} type='button'>
+            <button
+              onClick={toggleDarkMode}
+              type='button'
+              aria-label='Dark Mode'>
               <IoMdSunny size={28} />
             </button>
           </LinkItem>
