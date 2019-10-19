@@ -23,10 +23,12 @@ export default function(): JSX.Element {
   )
 }
 
-const Container = styled.div`
+const Container = styled.main`
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 48px;
 `
 
 const PaddingHorizontal = styled.div`

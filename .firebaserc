@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "dev": "dappface-dev",
+    "stg": "dappface-stg-v2",
+    "prd": "dappface-prd-v2"
+  }
+}
