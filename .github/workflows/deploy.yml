@@ -29,6 +29,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "10.16.3"
+      - name: Bump version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./bin/bump-version.sh
       - name: Install dependencies
         run: npm i
       - name: Build
@@ -37,3 +41,9 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: ./bin/deploy.sh
+      - name: Push version change to GitHub
+        run: |
+          if [ ! "${GITHUB_EVENT_NAME:-}" = "release" ] ; then
+            exit 0
+          fi
+          git push origin master
