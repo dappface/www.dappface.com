@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import {Color, Size} from '../const'
+import {Size} from '../const'
 
 export function Footer(): JSX.Element {
   return (
@@ -20,6 +20,6 @@ const Container = styled.footer`
 `
 
 const CopyRight = styled.p`
-  color: ${Color.Gray500};
+  color: ${({theme}): string => theme.copyright.color};
   font-size: ${Size.Font12}px;
 `

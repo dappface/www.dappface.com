@@ -1,7 +1,7 @@
 import React from 'react'
-import styled, {createGlobalStyle} from 'styled-components'
+import styled, {createGlobalStyle, ThemeProvider} from 'styled-components'
 
-import {lightTheme, darkTheme} from '../const'
+import {lightTheme, darkTheme, ThemeMode} from '../const'
 import {ThemeModeContext, useHasMounted, useThemeMode} from '../hooks'
 import {Header} from './header'
 import {Footer} from './footer'
@@ -17,15 +17,18 @@ export function Layout({children}: Props): JSX.Element {
 
   return (
     <ThemeModeContext.Provider value={themeMode}>
-      <>
-        <SEO />
-        <GlobalStyle hasMounted={hasMounted} />
-        <Container hasMounted={hasMounted}>
-          <Header />
-          {children}
-          <Footer />
-        </Container>
-      </>
+      <ThemeProvider
+        theme={themeMode.mode === ThemeMode.Light ? lightTheme : darkTheme}>
+        <>
+          <SEO />
+          <GlobalStyle hasMounted={hasMounted} />
+          <Container hasMounted={hasMounted}>
+            <Header />
+            {children}
+            <Footer />
+          </Container>
+        </>
+      </ThemeProvider>
     </ThemeModeContext.Provider>
   )
 }
@@ -66,6 +69,15 @@ const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
 
   ul {
     list-style-type: none;
+  }
+
+  #copyright {
+    &.light {
+      color: ${lightTheme.copyright.color};
+    }
+    &.dark {
+      color: ${darkTheme.copyright.color};
+    }
   }
 `
 

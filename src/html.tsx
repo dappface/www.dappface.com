@@ -37,7 +37,7 @@ export default function HTML(props: Props): JSX.Element {
                   window.__onThemeChange(newTheme);
                 }
 
-                var preferredTheme;
+                let preferredTheme;
                 try {
                   preferredTheme = localStorage.getItem('theme');
                 } catch (err) { }
@@ -49,7 +49,7 @@ export default function HTML(props: Props): JSX.Element {
                   } catch (err) {}
                 }
 
-                var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+                let darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
                 darkQuery.addListener(function(e) {
                   window.__setPreferredTheme(e.matches ? '${ThemeMode.Dark}' : '${ThemeMode.Light}');
                 });
