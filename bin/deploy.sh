@@ -14,5 +14,5 @@ elif [ "${GITHUB_EVENT_NAME:-}" = "push" ] ; then
   fi
 fi
 
-./node_modules/.bin/firebase use dev --token="$FIREBASE_TOKEN"
+./node_modules/.bin/firebase use "$APP_ENV" --token="$FIREBASE_TOKEN"
 ./node_modules/.bin/firebase deploy --token="$FIREBASE_TOKEN"
