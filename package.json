@@ -2,7 +2,7 @@
   "name": "www.dappface.com",
   "private": true,
   "description": "Official landing page for open source web3 mobile browser DAPPFACE",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "build": "gatsby build",
     "lint": "eslint . --ext .js,.tsx,.ts",
