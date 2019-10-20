@@ -37,16 +37,16 @@ export function Header(): JSX.Element {
           </a>
         </LinkItem>
 
-        {hasMounted ? (
-          <LinkItem>
+        <LinkItem>
+          {hasMounted ? (
             <button
               onClick={toggleDarkMode}
               type='button'
               aria-label='Dark Mode'>
               <IoMdSunny size={28} />
             </button>
-          </LinkItem>
-        ) : null}
+          ) : null}
+        </LinkItem>
       </LinkList>
     </Container>
   )
@@ -72,5 +72,9 @@ const LinkList = styled.ul`
 `
 
 const LinkItem = styled.li`
-  padding: 0 ${Size.Margin16}px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
 `
