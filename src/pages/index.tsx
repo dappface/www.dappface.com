@@ -11,11 +11,11 @@ export default function(): JSX.Element {
         <PaddingHorizontal>Hello</PaddingHorizontal>
         <PaddingHorizontal>
           <Player
+            title='DAPPFACE demo'
+            src='https://www.youtube-nocookie.com/embed/89TFedIOfeY?autoplay=1&controls=0'
             width='420'
             height='315'
             frameBorder='0'
-            title='DAPPFACE demo'
-            src='https://www.youtube.com/embed/89TFedIOfeY?autoplay=1&controls=0'
           />
         </PaddingHorizontal>
       </Container>
