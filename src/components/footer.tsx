@@ -13,7 +13,7 @@ export function Footer(): JSX.Element {
 
 const Container = styled.footer`
   display: flex;
-  height: 40px;
+  height: 90px;
   padding: 0 ${Size.Margin16}px;
   align-items: center;
   justify-content: center;
