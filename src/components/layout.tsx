@@ -1,3 +1,4 @@
+import '../layout/normalize.css'
 import React from 'react'
 import styled, {createGlobalStyle, ThemeProvider} from 'styled-components'
 
@@ -38,11 +39,9 @@ interface GlobalStyleProps {
 }
 
 const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
-  @import url('https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab:300,400&display=swap');
+	@import url('https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab:300,400&display=swap');
 
   body {
-    margin: 0;
-
     &.light {
       background: ${lightTheme.background};
       color: ${lightTheme.color};
@@ -68,6 +67,8 @@ const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
   }
 
   ul {
+		margin: 0;
+		padding: 0;
     list-style-type: none;
   }
 
@@ -78,7 +79,11 @@ const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
     &.dark {
       color: ${darkTheme.copyright.color};
     }
-  }
+	}
+	
+	h1 {
+		margin: 0;
+	}
 `
 
 interface ContainerProps {

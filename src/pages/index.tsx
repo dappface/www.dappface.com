@@ -36,5 +36,6 @@ const PaddingHorizontal = styled.div`
 `
 
 const Player = styled.iframe`
+  max-width: calc(100vw - ${Size.Margin16 * 2}px);
   border-radius: ${Size.BorderRadius}px;
 `
