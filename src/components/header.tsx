@@ -18,6 +18,10 @@ export function Header(): JSX.Element {
 
       <LinkList>
         <LinkItem>
+          <Link to='/contact'>Contact</Link>
+        </LinkItem>
+
+        <LinkItem>
           <a
             target='_blank'
             rel='noopener noreferrer'
