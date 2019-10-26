@@ -1,12 +1,13 @@
 import React from 'react'
+import {PageRendererProps} from 'gatsby'
 import styled from 'styled-components'
 
 import {Layout} from '../components/layout'
 import {Size} from '../const'
 
-export default function(): JSX.Element {
+export default function({location}: PageRendererProps): JSX.Element {
   return (
-    <Layout>
+    <Layout location={location}>
       <Container>
         <PaddingHorizontal>Hello</PaddingHorizontal>
         <PaddingHorizontal>

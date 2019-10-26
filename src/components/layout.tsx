@@ -14,7 +14,7 @@ interface Props {
   location: PageRendererProps['location']
 }
 
-export function Layout({children}: Props): JSX.Element {
+export function Layout({children, location}: Props): JSX.Element {
   const themeMode = useThemeMode()
   const hasMounted = useHasMounted()
 
