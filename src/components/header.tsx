@@ -3,7 +3,8 @@ import {Link} from 'gatsby'
 import {IoMdSunny, IoLogoGithub, IoLogoTwitter} from 'react-icons/io'
 import styled from 'styled-components'
 
-import {Size} from '../const'
+import {HeaderSize, Size} from '../const'
+import {HeaderNav} from './header-nav'
 import {useHasMounted, useDarkMode} from '../hooks'
 
 export function Header(): JSX.Element {
@@ -53,43 +54,18 @@ export function Header(): JSX.Element {
         </LinkList>
       </Row>
 
-      <HeaderNav>
-        <HeaderNavList>
-          <HeaderNavItem>
-            <NavLink to='/contact'>Contact</NavLink>
-          </HeaderNavItem>
-
-          <HeaderNavItem>
-            <NavLink to='/contact'>Contact</NavLink>
-          </HeaderNavItem>
-
-          <HeaderNavItem>
-            <NavLink to='/contact'>Contact</NavLink>
-          </HeaderNavItem>
-
-          <HeaderNavItem>
-            <NavLink to='/contact'>Contact</NavLink>
-          </HeaderNavItem>
-
-          <HeaderNavItem>
-            <NavLink to='/contact'>Contact</NavLink>
-          </HeaderNavItem>
-        </HeaderNavList>
-      </HeaderNav>
+      <HeaderNav />
     </Container>
   )
 }
 
-const HEADER_HEIGHT = 77
-const HEADER_NAV_HEIGHT = 48
-
 const Container = styled.header`
   display: flex;
   flex-direction: column;
-  height: ${HEADER_HEIGHT + HEADER_NAV_HEIGHT}px;
+  height: ${HeaderSize.Height + HeaderSize.NavHeight}px;
 
   @media only screen and (min-width: 768px) {
-    height: ${HEADER_HEIGHT}px;
+    height: ${HeaderSize.Height}px;
   }
 `
 
@@ -108,7 +84,7 @@ const HomeLink = styled(Link)`
   h1 {
     padding: 0 ${Size.Margin24}px;
     display: flex;
-    height: ${HEADER_HEIGHT}px;
+    height: ${HeaderSize.Height}px;
     align-items: center;
     font-size: 24px;
     font-family: 'Roboto Slab', serif;
@@ -127,30 +103,5 @@ const LogoLink = styled.li`
   align-items: center;
   justify-content: center;
   width: 50px;
-  height: ${HEADER_HEIGHT}px;
-`
-
-const HeaderNav = styled.nav`
-  height: ${HEADER_NAV_HEIGHT}px;
-
-  @media only screen and (min-width: 768px) {
-    display: none;
-  }
-`
-
-const HeaderNavList = styled.ul`
-  overflow: scroll;
-  white-space: nowrap;
-`
-
-const HeaderNavItem = styled.li`
-  display: inline-block;
-  width: 92px;
-`
-
-const NavLink = styled(Link)`
-  height: ${HEADER_NAV_HEIGHT}px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: ${HeaderSize.Height}px;
 `
