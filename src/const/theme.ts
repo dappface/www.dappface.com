@@ -1,26 +1,29 @@
-import {Color} from './color'
+import {Color, TextColor} from './color'
 
 export const lightTheme: Theme = {
   background: Color.White,
-  color: Color.Black,
-  copyright: {
-    color: Color.Gray500,
+  color: {
+    high: TextColor.BlackHighEmphasis,
+    medium: TextColor.BlackMediumEmphasis,
+    disabled: TextColor.BlackDisabled,
   },
 }
 
 export const darkTheme: Theme = {
   background: Color.Black,
-  color: Color.White,
-  copyright: {
-    color: Color.Gray300,
+  color: {
+    high: TextColor.WhiteHighEmphasis,
+    medium: TextColor.WhiteMediumEmphasis,
+    disabled: TextColor.WhiteDisabled,
   },
 }
 
 export interface Theme {
   background: Color
-  color: Color
-  copyright: {
-    color: Color
+  color: {
+    high: TextColor
+    medium: TextColor
+    disabled: TextColor
   }
 }
 

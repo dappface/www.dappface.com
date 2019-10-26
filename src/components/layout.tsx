@@ -1,5 +1,6 @@
 import '../layout/normalize.css'
 import React from 'react'
+import {PageRendererProps} from 'gatsby'
 import styled, {createGlobalStyle, ThemeProvider} from 'styled-components'
 
 import {lightTheme, darkTheme, ThemeMode} from '../const'
@@ -10,6 +11,7 @@ import {SEO} from './seo'
 
 interface Props {
   children: JSX.Element | JSX.Element[]
+  location: PageRendererProps['location']
 }
 
 export function Layout({children}: Props): JSX.Element {
@@ -24,7 +26,7 @@ export function Layout({children}: Props): JSX.Element {
           <SEO />
           <GlobalStyle hasMounted={hasMounted} />
           <Container hasMounted={hasMounted}>
-            <Header />
+            <Header location={location} />
             {children}
             <Footer />
           </Container>
@@ -39,17 +41,17 @@ interface GlobalStyleProps {
 }
 
 const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
-	@import url('https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab:300,400&display=swap');
+  @import url('https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab:300,400&display=swap');
 
   body {
     &.light {
       background: ${lightTheme.background};
-      color: ${lightTheme.color};
+      color: ${lightTheme.color.medium};
     }
 
     &.dark {
       background: ${darkTheme.background};
-      color: ${darkTheme.color};
+      color: ${darkTheme.color.medium};
     }
     ${({hasMounted}): string =>
       hasMounted ? 'transition: all 0.2s ease-out;' : ''}}
@@ -67,23 +69,23 @@ const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
   }
 
   ul {
-		margin: 0;
-		padding: 0;
+    margin: 0;
+    padding: 0;
     list-style-type: none;
   }
 
   #copyright {
     &.light {
-      color: ${lightTheme.copyright.color};
+      color: ${lightTheme.color.disabled};
     }
     &.dark {
-      color: ${darkTheme.copyright.color};
+      color: ${darkTheme.color.disabled};
     }
-	}
-	
-	h1 {
-		margin: 0;
-	}
+  }
+
+  h1 {
+    margin: 0;
+  }
 `
 
 interface ContainerProps {

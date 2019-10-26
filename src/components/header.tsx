@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'gatsby'
+import {Link, PageRendererProps} from 'gatsby'
 import {IoMdSunny, IoLogoGithub, IoLogoTwitter} from 'react-icons/io'
 import styled from 'styled-components'
 
@@ -7,7 +7,11 @@ import {HeaderSize, Size} from '../const'
 import {HeaderNav} from './header-nav'
 import {useHasMounted, useDarkMode} from '../hooks'
 
-export function Header(): JSX.Element {
+interface Props {
+  location: PageRendererProps['location']
+}
+
+export function Header({location}: Props): JSX.Element {
   const {toggleDarkMode} = useDarkMode()
   const hasMounted = useHasMounted()
 
@@ -54,7 +58,7 @@ export function Header(): JSX.Element {
         </LinkList>
       </Row>
 
-      <HeaderNav />
+      <HeaderNav location={location} />
     </Container>
   )
 }
@@ -82,6 +86,7 @@ const Home = styled.div`
 
 const HomeLink = styled(Link)`
   h1 {
+    color: ${({theme}) => theme.color.high};
     padding: 0 ${Size.Margin24}px;
     display: flex;
     height: ${HeaderSize.Height}px;
@@ -104,4 +109,5 @@ const LogoLink = styled.li`
   justify-content: center;
   width: 50px;
   height: ${HeaderSize.Height}px;
+  color: ${({theme}) => theme.color.high};
 `
