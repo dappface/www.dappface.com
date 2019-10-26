@@ -43,7 +43,17 @@ interface GlobalStyleProps {
 const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
   @import url('https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab:300,400&display=swap');
 
+  html {
+    height: 100%;
+  }
+
   body {
+    div#gatsby-focus-wrapper {
+      display: flex;
+      flex: 1;
+      min-height: 100vh;
+    }
+
     &.light {
       background: ${lightTheme.background};
       color: ${lightTheme.color.medium};
@@ -53,6 +63,7 @@ const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
       background: ${darkTheme.background};
       color: ${darkTheme.color.medium};
     }
+
     ${({hasMounted}): string =>
       hasMounted ? 'transition: all 0.2s ease-out;' : ''}}
   }
@@ -93,8 +104,8 @@ interface ContainerProps {
 }
 
 const Container = styled.div<ContainerProps>`
-  height: 100vh;
   display: flex;
+  flex: 1;
   flex-direction: column;
   box-sizing: border-box;
   font-family: 'Roboto Mono', monospace;
@@ -115,5 +126,12 @@ const Container = styled.div<ContainerProps>`
     &:hover {
       opacity: 0.7;
     }
+  }
+
+  > main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
   }
 `

@@ -103,7 +103,7 @@ const Home = styled.div`
 `
 
 const HomeLink = styled(Link)`
-  h1 {
+  > h1 {
     color: ${({theme}) => theme.color.high};
     padding: 0 ${Size.Margin24}px;
     display: flex;

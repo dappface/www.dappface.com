@@ -25,10 +25,6 @@ export default function({location}: PageRendererProps): JSX.Element {
 }
 
 const Container = styled.main`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
   padding-bottom: 48px;
 `
 

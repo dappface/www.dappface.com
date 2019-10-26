@@ -15,12 +15,7 @@ export default function({location}: PageRendererProps) {
   )
 }
 
-const Container = styled.main`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-`
+const Container = styled.main``
 
 const PaddingHorizontal = styled.div`
   padding: ${Size.Margin16}px 0;
