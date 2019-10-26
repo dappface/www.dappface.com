@@ -2,28 +2,12 @@ import React from 'react'
 import {Link, PageRendererProps} from 'gatsby'
 import styled from 'styled-components'
 
-import {HeaderSize} from '../const'
+import {HeaderSize, Size} from '../const'
 
 const HEADER_NAV_LINKS = [
   {
     name: 'Contact',
     path: '/contact',
-  },
-  {
-    name: 'About',
-    path: '/about',
-  },
-  {
-    name: 'Contact2',
-    path: '/contac2t',
-  },
-  {
-    name: 'Contact3',
-    path: '/contact3',
-  },
-  {
-    name: 'Contact4',
-    path: '/contact4',
   },
 ]
 
@@ -47,10 +31,6 @@ export function HeaderNav({location}: Props): JSX.Element {
 
 const Container = styled.nav`
   height: ${HeaderSize.NavHeight}px;
-
-  @media only screen and (min-width: 768px) {
-    display: none;
-  }
 `
 
 const NavList = styled.ul`
@@ -72,6 +52,11 @@ const NavItem = styled.li<NavItemProps>`
     `
     color: ${theme.color.high};
   `}
+
+  @media only screen and (min-width: 768px) {
+    width: auto;
+    padding: 0 ${Size.Margin16}px;
+  }
 `
 
 const NavLink = styled(Link)`

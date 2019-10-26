@@ -17,12 +17,16 @@ export function Header({location}: Props): JSX.Element {
 
   return (
     <Container>
-      <Row>
+      <Bar>
         <Home>
           <HomeLink to='/'>
             <h1>DAPPFACE</h1>
           </HomeLink>
         </Home>
+
+        <LargerDeviceNavContainer>
+          <HeaderNav location={location} />
+        </LargerDeviceNavContainer>
 
         <LinkList>
           <LogoLink>
@@ -56,9 +60,11 @@ export function Header({location}: Props): JSX.Element {
             ) : null}
           </LogoLink>
         </LinkList>
-      </Row>
+      </Bar>
 
-      <HeaderNav location={location} />
+      <SmallDeviceNavContainer>
+        <HeaderNav location={location} />
+      </SmallDeviceNavContainer>
     </Container>
   )
 }
@@ -66,16 +72,28 @@ export function Header({location}: Props): JSX.Element {
 const Container = styled.header`
   display: flex;
   flex-direction: column;
-  height: ${HeaderSize.Height + HeaderSize.NavHeight}px;
+  height: ${HeaderSize.Height}px;
 
-  @media only screen and (min-width: 768px) {
-    height: ${HeaderSize.Height}px;
+  @media only screen and (max-width: 768px) {
+    height: ${HeaderSize.Height + HeaderSize.NavHeight}px;
   }
 `
 
-const Row = styled.div`
+const Bar = styled.div`
   display: flex;
   align-items: center;
+`
+
+const LargerDeviceNavContainer = styled.div`
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+`
+
+const SmallDeviceNavContainer = styled.div`
+  @media only screen and (min-width: 768px) {
+    display: none;
+  }
 `
 
 const Home = styled.div`
