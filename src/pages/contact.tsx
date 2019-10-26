@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import {Layout} from '../components/layout'
 import {Size} from '../const'
 
-export default function({location}: PageRendererProps) {
+export default function({location}: PageRendererProps): JSX.Element {
   return (
     <Layout location={location}>
       <Container>
@@ -44,7 +44,7 @@ const Header = styled.h2`
   max-width: 800px;
   width: 100vw;
   padding: ${Size.Margin16}px;
-  color: ${({theme}) => theme.color.high};
+  color: ${({theme}): string => theme.color.high};
 `
 
 const Form = styled.form`
@@ -58,15 +58,15 @@ const Form = styled.form`
   input,
   textarea {
     outline: none !important;
-    color: ${({theme}) => theme.color.medium};
-    background: ${({theme}) => theme.background};
+    color: ${({theme}): string => theme.color.medium};
+    background: ${({theme}): string => theme.background};
     border-width: 0;
     border-bottom-width: 2px;
-    border-bottom-color: ${({theme}) => theme.color.disabled};
+    border-bottom-color: ${({theme}): string => theme.color.disabled};
     transition: all 0.2s ease-out;
 
     &:focus {
-      border-bottom-color: ${({theme}) => theme.color.high};
+      border-bottom-color: ${({theme}): string => theme.color.high};
     }
   }
 
@@ -86,7 +86,7 @@ const Field = styled.div`
 `
 
 const Label = styled.label`
-  color: ${({theme}) => theme.color.high};
+  color: ${({theme}): string => theme.color.high};
   padding: ${Size.Margin8}px 0;
 `
 
@@ -101,7 +101,7 @@ const SubmitButton = styled.button`
   padding: 0 16px;
   border-radius: 4px;
 
-  ${({theme}) => `
+  ${({theme}): string => `
     color: ${theme.color.high};
     border: 2px solid ${theme.color.high};
   `}

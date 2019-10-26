@@ -47,11 +47,8 @@ const NavItem = styled.li<NavItemProps>`
   width: 92px;
   color: ${({theme}): string => theme.color.medium};
 
-  ${({isCurrentPage, theme}) =>
-    isCurrentPage &&
-    `
-    color: ${theme.color.high};
-  `}
+  ${({isCurrentPage, theme}): string =>
+    isCurrentPage ? `color: ${theme.color.high};` : ''}
 
   @media only screen and (min-width: 768px) {
     width: auto;

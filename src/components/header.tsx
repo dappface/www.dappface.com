@@ -104,7 +104,7 @@ const Home = styled.div`
 
 const HomeLink = styled(Link)`
   > h1 {
-    color: ${({theme}) => theme.color.high};
+    color: ${({theme}): string => theme.color.high};
     padding: 0 ${Size.Margin24}px;
     display: flex;
     height: ${HeaderSize.Height}px;
@@ -127,5 +127,5 @@ const LogoLink = styled.li`
   justify-content: center;
   width: 50px;
   height: ${HeaderSize.Height}px;
-  color: ${({theme}) => theme.color.high};
+  color: ${({theme}): string => theme.color.high};
 `

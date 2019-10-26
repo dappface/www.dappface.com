@@ -1,11 +1,12 @@
 import React from 'react'
+import {PageRendererProps} from 'gatsby'
 import styled from 'styled-components'
 
 import {Layout} from '../components/layout'
 
-export default function(): JSX.Element {
+export default function({location}: PageRendererProps): JSX.Element {
   return (
-    <Layout>
+    <Layout location={location}>
       <Container>Page not found</Container>
     </Layout>
   )
