@@ -1,13 +1,26 @@
 import React from 'react'
+import {graphql} from 'gatsby'
 import {PageRendererProps} from 'gatsby'
 import styled from 'styled-components'
 
 import {Layout} from '../components/layout'
+import {SEO} from '../components/seo'
 import {Size} from '../const'
 
-export default function({location}: PageRendererProps): JSX.Element {
+interface Props extends PageRendererProps {
+  data: {
+    site: {
+      siteMetadata: {
+        subtitle: string
+      }
+    }
+  }
+}
+
+export default function({location, data}: Props): JSX.Element {
   return (
     <Layout location={location}>
+      <SEO titleTemplate={`%s - ${data.site.siteMetadata.subtitle}`} />
       <Container>
         <PaddingHorizontal>Hello</PaddingHorizontal>
         <PaddingHorizontal>
@@ -23,6 +36,16 @@ export default function({location}: PageRendererProps): JSX.Element {
     </Layout>
   )
 }
+
+export const query = graphql`
+  query {
+    site {
+      siteMetadata {
+        subtitle
+      }
+    }
+  }
+`
 
 const Container = styled.main`
   align-items: center;

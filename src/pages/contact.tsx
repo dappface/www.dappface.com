@@ -3,35 +3,39 @@ import {PageRendererProps} from 'gatsby'
 import styled from 'styled-components'
 
 import {Layout} from '../components/layout'
+import {SEO} from '../components/seo'
 import {Size} from '../const'
 
 export default function({location}: PageRendererProps): JSX.Element {
   return (
     <Layout location={location}>
-      <Container>
-        <Header>Contact</Header>
-        <Form action='https://api.dappface.com/contact' method='post'>
-          <Field>
-            <Label htmlFor='name'>Name</Label>
-            <input type='text' id='name' name='name' required />
-            <HelperText>required</HelperText>
-          </Field>
+      <>
+        <SEO title='Contact' />
+        <Container>
+          <Header>Contact</Header>
+          <Form action='https://api.dappface.com/contact' method='post'>
+            <Field>
+              <Label htmlFor='name'>Name</Label>
+              <input type='text' id='name' name='name' required />
+              <HelperText>required</HelperText>
+            </Field>
 
-          <Field>
-            <Label htmlFor='email'>Email</Label>
-            <input type='text' id='email' name='email' required />
-            <HelperText>required</HelperText>
-          </Field>
+            <Field>
+              <Label htmlFor='email'>Email</Label>
+              <input type='text' id='email' name='email' required />
+              <HelperText>required</HelperText>
+            </Field>
 
-          <Field>
-            <Label htmlFor='message'>Message</Label>
-            <textarea id='message' name='message' required />
-            <HelperText>required</HelperText>
-          </Field>
+            <Field>
+              <Label htmlFor='message'>Message</Label>
+              <textarea id='message' name='message' required />
+              <HelperText>required</HelperText>
+            </Field>
 
-          <SubmitButton type='submit'>Submit</SubmitButton>
-        </Form>
-      </Container>
+            <SubmitButton type='submit'>Submit</SubmitButton>
+          </Form>
+        </Container>
+      </>
     </Layout>
   )
 }
