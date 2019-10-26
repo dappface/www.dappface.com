@@ -25,6 +25,7 @@ export default function({location}: PageRendererProps): JSX.Element {
 }
 
 const Container = styled.main`
+  align-items: center;
   padding-bottom: 48px;
 `
 

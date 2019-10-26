@@ -65,7 +65,7 @@ const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
     }
 
     ${({hasMounted}): string =>
-      hasMounted ? 'transition: all 0.2s ease-out;' : ''}}
+      hasMounted ? 'transition: all 0.2s ease-out;' : ''}
   }
 
   a, button, input[type="submit"], input[type="reset"] {
@@ -97,6 +97,10 @@ const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
   h1 {
     margin: 0;
   }
+
+  div {
+    box-sizing: border-box;
+  }
 `
 
 interface ContainerProps {
@@ -107,7 +111,6 @@ const Container = styled.div<ContainerProps>`
   display: flex;
   flex: 1;
   flex-direction: column;
-  box-sizing: border-box;
   font-family: 'Roboto Mono', monospace;
 
   ${({hasMounted}): string =>
@@ -132,6 +135,5 @@ const Container = styled.div<ContainerProps>`
     display: flex;
     flex: 1;
     flex-direction: column;
-    align-items: center;
   }
 `
