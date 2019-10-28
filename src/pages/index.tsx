@@ -1,6 +1,5 @@
 import React from 'react'
-import {graphql} from 'gatsby'
-import {PageRendererProps} from 'gatsby'
+import {graphql, PageRendererProps} from 'gatsby'
 import styled from 'styled-components'
 
 import {Layout} from '../components/layout'
