@@ -6,6 +6,18 @@ import {Layout} from '../components/layout'
 import {SEO} from '../components/seo'
 import {Size} from '../const'
 
+const DOMAIN = getDomain()
+function getDomain(): string {
+  switch (process.env.APP_ENV) {
+    case 'prd':
+      return 'dappface.com'
+    case 'stg':
+      return 'stg.dappface.com'
+    default:
+      return 'dev.dappface.com'
+  }
+}
+
 export default function({location}: PageRendererProps): JSX.Element {
   return (
     <Layout location={location}>
@@ -13,7 +25,7 @@ export default function({location}: PageRendererProps): JSX.Element {
         <SEO title='Contact' />
         <Container>
           <Header>Contact</Header>
-          <Form action='https://api.dappface.com/contact' method='post'>
+          <Form action={`https://api.${DOMAIN}/contact`} method='post'>
             <Field>
               <Label htmlFor='name'>Name</Label>
               <input type='text' id='name' name='name' required />

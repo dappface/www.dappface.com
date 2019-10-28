@@ -35,6 +35,8 @@ jobs:
         run: ./bin/bump-version.sh
       - name: Install dependencies
         run: npm i
+      - name: Set env
+        run: bin/set-env.sh
       - name: Build
         run: npm run build
       - name: Deploy to firebase
