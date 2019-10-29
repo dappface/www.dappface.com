@@ -6,3 +6,8 @@ export enum Size {
   Margin16 = 16,
   Margin24 = 24,
 }
+
+export enum HeaderSize {
+  Height = 77,
+  NavHeight = 48,
+}

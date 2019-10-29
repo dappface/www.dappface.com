@@ -20,6 +20,6 @@ const Container = styled.footer`
 `
 
 const CopyRight = styled.p`
-  color: ${({theme}): string => theme.copyright.color};
+  color: ${({theme}): string => theme.color.disabled};
   font-size: ${Size.Font12}px;
 `

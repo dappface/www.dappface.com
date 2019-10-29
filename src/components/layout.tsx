@@ -1,4 +1,6 @@
+import '../layout/normalize.css'
 import React from 'react'
+import {PageRendererProps} from 'gatsby'
 import styled, {createGlobalStyle, ThemeProvider} from 'styled-components'
 
 import {lightTheme, darkTheme, ThemeMode} from '../const'
@@ -9,9 +11,10 @@ import {SEO} from './seo'
 
 interface Props {
   children: JSX.Element | JSX.Element[]
+  location: PageRendererProps['location']
 }
 
-export function Layout({children}: Props): JSX.Element {
+export function Layout({children, location}: Props): JSX.Element {
   const themeMode = useThemeMode()
   const hasMounted = useHasMounted()
 
@@ -23,7 +26,7 @@ export function Layout({children}: Props): JSX.Element {
           <SEO />
           <GlobalStyle hasMounted={hasMounted} />
           <Container hasMounted={hasMounted}>
-            <Header />
+            <Header location={location} />
             {children}
             <Footer />
           </Container>
@@ -40,20 +43,29 @@ interface GlobalStyleProps {
 const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
   @import url('https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab:300,400&display=swap');
 
+  html {
+    height: 100%;
+  }
+
   body {
-    margin: 0;
+    div#gatsby-focus-wrapper {
+      display: flex;
+      flex: 1;
+      min-height: 100vh;
+    }
 
     &.light {
       background: ${lightTheme.background};
-      color: ${lightTheme.color};
+      color: ${lightTheme.color.medium};
     }
 
     &.dark {
       background: ${darkTheme.background};
-      color: ${darkTheme.color};
+      color: ${darkTheme.color.medium};
     }
+
     ${({hasMounted}): string =>
-      hasMounted ? 'transition: all 0.2s ease-out;' : ''}}
+      hasMounted ? 'transition: all 0.2s ease-out;' : ''}
   }
 
   a, button, input[type="submit"], input[type="reset"] {
@@ -68,16 +80,26 @@ const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
   }
 
   ul {
+    margin: 0;
+    padding: 0;
     list-style-type: none;
   }
 
   #copyright {
     &.light {
-      color: ${lightTheme.copyright.color};
+      color: ${lightTheme.color.disabled};
     }
     &.dark {
-      color: ${darkTheme.copyright.color};
+      color: ${darkTheme.color.disabled};
     }
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  div {
+    box-sizing: border-box;
   }
 `
 
@@ -86,10 +108,9 @@ interface ContainerProps {
 }
 
 const Container = styled.div<ContainerProps>`
-  height: 100vh;
   display: flex;
+  flex: 1;
   flex-direction: column;
-  box-sizing: border-box;
   font-family: 'Roboto Mono', monospace;
 
   ${({hasMounted}): string =>
@@ -108,5 +129,11 @@ const Container = styled.div<ContainerProps>`
     &:hover {
       opacity: 0.7;
     }
+  }
+
+  > main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
   }
 `

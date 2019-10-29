@@ -6,7 +6,7 @@
   "scripts": {
     "build": "gatsby build",
     "lint": "eslint . --ext .js,.tsx,.ts",
-    "start": "gatsby develop",
+    "start": "GATSBY_DOMAIN=dev.dappface.com gatsby develop",
     "serve": "gatsby serve",
     "typecheck": "tsc",
     "upgrade-interactive": "npx npm-check --update"

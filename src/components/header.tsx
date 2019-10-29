@@ -1,80 +1,131 @@
 import React from 'react'
-import {Link} from 'gatsby'
+import {Link, PageRendererProps} from 'gatsby'
 import {IoMdSunny, IoLogoGithub, IoLogoTwitter} from 'react-icons/io'
 import styled from 'styled-components'
 
-import {Size} from '../const'
+import {HeaderSize, Size} from '../const'
+import {HeaderNav} from './header-nav'
 import {useHasMounted, useDarkMode} from '../hooks'
 
-export function Header(): JSX.Element {
+interface Props {
+  location: PageRendererProps['location']
+}
+
+export function Header({location}: Props): JSX.Element {
   const {toggleDarkMode} = useDarkMode()
   const hasMounted = useHasMounted()
 
   return (
     <Container>
-      <Link to='/'>
-        <Logo>DAPPFACE</Logo>
-      </Link>
+      <Bar>
+        <Home>
+          <HomeLink to='/'>
+            <h1>DAPPFACE</h1>
+          </HomeLink>
+        </Home>
 
-      <LinkList>
-        <LinkItem>
-          <a
-            target='_blank'
-            rel='noopener noreferrer'
-            href='https://github.com/dappface'
-            aria-label='Go to GitHub Page'>
-            <IoLogoGithub size={28} />
-          </a>
-        </LinkItem>
+        <LargerDeviceNavContainer>
+          <HeaderNav location={location} />
+        </LargerDeviceNavContainer>
 
-        <LinkItem>
-          <a
-            target='_blank'
-            rel='noopener noreferrer'
-            href='https://twitter.com/dappface_com'
-            aria-label='Go to Twitter Page'>
-            <IoLogoTwitter size={28} />
-          </a>
-        </LinkItem>
+        <LinkList>
+          <LogoLink>
+            <a
+              target='_blank'
+              rel='noopener noreferrer'
+              href='https://github.com/dappface'
+              aria-label='Go to GitHub Page'>
+              <IoLogoGithub size={28} />
+            </a>
+          </LogoLink>
 
-        <LinkItem>
-          {hasMounted ? (
-            <button
-              onClick={toggleDarkMode}
-              type='button'
-              aria-label='Dark Mode'>
-              <IoMdSunny size={28} />
-            </button>
-          ) : null}
-        </LinkItem>
-      </LinkList>
+          <LogoLink>
+            <a
+              target='_blank'
+              rel='noopener noreferrer'
+              href='https://twitter.com/dappface_com'
+              aria-label='Go to Twitter Page'>
+              <IoLogoTwitter size={28} />
+            </a>
+          </LogoLink>
+
+          <LogoLink>
+            {hasMounted ? (
+              <button
+                onClick={toggleDarkMode}
+                type='button'
+                aria-label='Dark Mode'>
+                <IoMdSunny size={28} />
+              </button>
+            ) : null}
+          </LogoLink>
+        </LinkList>
+      </Bar>
+
+      <SmallDeviceNavContainer>
+        <HeaderNav location={location} />
+      </SmallDeviceNavContainer>
     </Container>
   )
 }
 
 const Container = styled.header`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 90px;
-  padding: 0 ${Size.Margin24}px;
+  flex-direction: column;
+  height: ${HeaderSize.Height}px;
+
+  @media only screen and (max-width: 768px) {
+    height: ${HeaderSize.Height + HeaderSize.NavHeight}px;
+  }
 `
 
-const Logo = styled.h1`
-  font-size: 24px;
-  font-family: 'Roboto Slab', serif;
-  font-weight: 300;
+const Bar = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const LargerDeviceNavContainer = styled.div`
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+`
+
+const SmallDeviceNavContainer = styled.div`
+  @media only screen and (min-width: 768px) {
+    display: none;
+  }
+`
+
+const Home = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+`
+
+const HomeLink = styled(Link)`
+  > h1 {
+    color: ${({theme}): string => theme.color.high};
+    padding: 0 ${Size.Margin24}px;
+    display: flex;
+    height: ${HeaderSize.Height}px;
+    align-items: center;
+    font-size: 24px;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 300;
+  }
 `
 
 const LinkList = styled.ul`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 `
 
-const LinkItem = styled.li`
+const LogoLink = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: ${HeaderSize.Height}px;
+  color: ${({theme}): string => theme.color.high};
 `

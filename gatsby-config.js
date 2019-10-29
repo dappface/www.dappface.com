@@ -1,7 +1,9 @@
 module.exports = {
   siteMetadata: {
     title: 'DAPPFACE',
-    description: 'Open Source Web3 Mobile Browser',
+    subtitle: 'Open Source Web3 Mobile Browser',
+    description:
+      'DAPPFACE is an open source crypto news aggregator and a mobile web3.',
     image: 'static/icon-512x512.png',
     url: 'https://www.dappface.com',
     twitter: {
