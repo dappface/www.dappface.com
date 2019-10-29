@@ -2,9 +2,9 @@ import React from 'react'
 import {PageRendererProps} from 'gatsby'
 import styled from 'styled-components'
 
-import {Layout} from '../components/layout'
-import {SEO} from '../components/seo'
-import {Size} from '../const'
+import {Layout} from '../../components/layout'
+import {SEO} from '../../components/seo'
+import {Size} from '../../const'
 
 export default function({location}: PageRendererProps): JSX.Element {
   return (
@@ -14,7 +14,7 @@ export default function({location}: PageRendererProps): JSX.Element {
         <Container>
           <Header>Contact</Header>
           <Form
-            action={`https://api.${process.env.DOMAIN}/contact`}
+            action={`https://api.${process.env.GATSBY_DOMAIN}/contact`}
             method='post'>
             <Field>
               <Label htmlFor='name'>Name</Label>
@@ -33,6 +33,12 @@ export default function({location}: PageRendererProps): JSX.Element {
               <textarea id='message' name='message' required />
               <HelperText>required</HelperText>
             </Field>
+
+            <input
+              type='hidden'
+              name='_next'
+              value={`https://www.${process.env.GATSBY_DOMAIN}/contact/thanks`}
+            />
 
             <SubmitButton type='submit'>Submit</SubmitButton>
           </Form>
