@@ -41,6 +41,7 @@ jobs:
         run: GATSBY_DOMAIN=$GATSBY_DOMAIN npm run build
       - name: Deploy to firebase
         env:
+          APP_ENV: $APP_ENV
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: ./bin/deploy.sh
       - name: Push version change to GitHub
