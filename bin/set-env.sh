@@ -13,3 +13,6 @@ else
   export APP_ENV=dev
   export GATSBY_DOMAIN=dev.dappface.com
 fi
+
+echo "::set-env name=APP_ENV::$APP_ENV"
+echo "::set-env name=GATSBY_DOMAIN::$GATSBY_DOMAIN"
