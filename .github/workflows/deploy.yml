@@ -38,7 +38,7 @@ jobs:
       - name: Set env
         run: bin/set-env.sh
       - name: Build
-        run: npm run build
+        run: DOMAIN=$DOMAIN npm run build
       - name: Deploy to firebase
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
