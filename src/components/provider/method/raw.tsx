@@ -81,7 +81,7 @@ export function RawMethod({method, params, children}: Props) {
   return (
     <Container>
       <Header>
-        <h3>{method}</h3>
+        <Method>{method}</Method>
         {method.split('_')[1] === 'subscribe' ? (
           subscriptionId ? (
             <Button onClick={unsubscribe}>Unsubscribe</Button>
@@ -94,6 +94,13 @@ export function RawMethod({method, params, children}: Props) {
       </Header>
 
       {children}
+
+      {params ? (
+        <Params>
+          <div>Params</div>
+          <pre>{JSON.stringify(params, null, 2)}</pre>
+        </Params>
+      ) : null}
 
       <Result>
         {errorMessage ? <Error>{errorMessage}</Error> : null}
@@ -113,6 +120,16 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 ${Size.Margin16}px;
+`
+
+const Method = styled.h3`
+  margin: ${Size.Margin8}px 0;
+`
+
+const Params = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 0 ${Size.Margin16}px;
 `
 

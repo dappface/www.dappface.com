@@ -14,7 +14,7 @@ export function GetBalanceMethod() {
   return (
     <RawMethod method='eth_getBalance' params={[address, 'latest']}>
       <Field>
-        <label htmlFor='address'>address</label>
+        <Label htmlFor='address'>address</Label>
         <input
           id='address'
           type='text'
@@ -28,8 +28,12 @@ export function GetBalanceMethod() {
 
 const Field = styled.div`
   width: 100%;
-  padding: 0 ${Size.Margin16}px;
+  padding: ${Size.Margin8}px ${Size.Margin16}px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+`
+
+const Label = styled.label`
+  padding: ${Size.Margin8}px 0;
 `
