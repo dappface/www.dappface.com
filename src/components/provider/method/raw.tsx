@@ -1,17 +1,18 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useMemo, useRef, useState} from 'react'
 import styled from 'styled-components'
 
 import {Size} from '../../../const'
-import {Button} from '../../atoms'
 
 interface Props {
   method: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   params?: any[]
   children?: JSX.Element | JSX.Element[]
 }
 
-export function RawMethod({method, params, children}: Props) {
-  const [result, setResult] = useState<string[] | undefined>()
+export function RawMethod({method, params, children}: Props): JSX.Element {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [result, setResult] = useState<{[key: string]: any} | undefined>()
   const [errorMessage, setErrorMessage] = useState('')
 
   async function run(): Promise<void> {
@@ -29,7 +30,8 @@ export function RawMethod({method, params, children}: Props) {
   )
 
   function onNotificationFactory(id: string) {
-    return (newResult: any) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (newResult: any): void => {
       if (newResult.subscription !== id) {
         return
       }
@@ -43,6 +45,7 @@ export function RawMethod({method, params, children}: Props) {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const notificationListener = useRef<(result: any) => void>()
 
   async function subscribe(): Promise<void> {
@@ -69,7 +72,7 @@ export function RawMethod({method, params, children}: Props) {
   }
 
   useEffect(
-    () => () => {
+    () => (): void => {
       if (!subscriptionId) {
         return
       }
@@ -78,19 +81,22 @@ export function RawMethod({method, params, children}: Props) {
     [subscriptionId],
   )
 
+  const button = useMemo(() => {
+    if (method.split('_')[1] === 'subscribe') {
+      if (subscriptionId) {
+        return <Button onClick={unsubscribe}>Unsubscribe</Button>
+      }
+      return <Button onClick={subscribe}>Subscribe</Button>
+    }
+
+    return <Button onClick={run}>Run</Button>
+  }, [method, run, subscriptionId, subscribe, unsubscribe])
+
   return (
     <Container>
       <Header>
         <Method>{method}</Method>
-        {method.split('_')[1] === 'subscribe' ? (
-          subscriptionId ? (
-            <Button onClick={unsubscribe}>Unsubscribe</Button>
-          ) : (
-            <Button onClick={subscribe}>Subscribe</Button>
-          )
-        ) : (
-          <Button onClick={run}>Run</Button>
-        )}
+        {button}
       </Header>
 
       {children}
@@ -140,4 +146,8 @@ const Result = styled.div`
 
 const Error = styled.div`
   color ${({theme}): string => theme.color.error};
+`
+
+const Button = styled.button`
+  cursor: pointer;
 `

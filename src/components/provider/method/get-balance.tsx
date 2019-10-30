@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import {Size} from '../../../const'
 import {RawMethod} from './raw'
 
-export function GetBalanceMethod() {
+export function GetBalanceMethod(): JSX.Element {
   const [address, setAddress] = useState('')
 
   function onChangeAddress(e: React.ChangeEvent<HTMLInputElement>): void {
