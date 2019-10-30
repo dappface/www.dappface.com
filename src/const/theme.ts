@@ -6,6 +6,7 @@ export const lightTheme: Theme = {
     high: TextColor.BlackHighEmphasis,
     medium: TextColor.BlackMediumEmphasis,
     disabled: TextColor.BlackDisabled,
+    error: TextColor.Error,
   },
 }
 
@@ -15,6 +16,7 @@ export const darkTheme: Theme = {
     high: TextColor.WhiteHighEmphasis,
     medium: TextColor.WhiteMediumEmphasis,
     disabled: TextColor.WhiteDisabled,
+    error: TextColor.DarkError,
   },
 }
 
@@ -24,6 +26,7 @@ export interface Theme {
     high: TextColor
     medium: TextColor
     disabled: TextColor
+    error: TextColor
   }
 }
 
