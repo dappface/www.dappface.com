@@ -1,5 +1,6 @@
 export * from './raw'
-export * from './get-balance'
+export * from './eth-get-balance'
+export * from './eth-sign'
 
 declare global {
   interface Window {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {RawMethod, GetBalanceMethod} from './method'
+import {RawMethod, EthGetBalanceMethod, EthSignMethod} from './method'
 
 export function EthereumPlayground(): JSX.Element {
   return (
@@ -10,13 +10,14 @@ export function EthereumPlayground(): JSX.Element {
         <div>
           <RawMethod method='eth_accounts' />
           <RawMethod method='eth_coinbase' />
+          <EthSignMethod />
         </div>
       </div>
 
       <div>
         <h3>Methods directly call remote node</h3>
         <div>
-          <GetBalanceMethod />
+          <EthGetBalanceMethod />
           <RawMethod method='eth_subscribe' params={['newHeads']} />
         </div>
       </div>

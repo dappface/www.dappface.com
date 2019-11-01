@@ -4,22 +4,26 @@ import styled from 'styled-components'
 import {Size} from '../../../const'
 import {RawMethod} from './raw'
 
-export function GetBalanceMethod(): JSX.Element {
-  const [address, setAddress] = useState('')
-
-  function onChangeAddress(e: React.ChangeEvent<HTMLInputElement>): void {
-    setAddress(e.target.value)
-  }
+export function EthSignMethod(): JSX.Element {
+  const [from, setFrom] = useState('')
+  const [message, setMessage] = useState('')
 
   return (
-    <RawMethod method='eth_getBalance' params={[address, 'latest']}>
+    <RawMethod method='eth_sign' params={[from, message]}>
       <Field>
-        <Label htmlFor='address'>address</Label>
+        <Label htmlFor='from'>from</Label>
         <input
-          id='address'
+          id='from'
           type='text'
           placeholder='0x000...'
-          onChange={onChangeAddress}
+          onChange={e => setFrom(e.target.value)}
+        />
+        <Label htmlFor='message'>message</Label>
+        <input
+          id='message'
+          type='text'
+          placeholder='my message...'
+          onChange={e => setMessage(e.target.value)}
         />
       </Field>
     </RawMethod>

@@ -12,14 +12,30 @@ interface Props {
 
 export function RawMethod({method, params, children}: Props): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [result, setResult] = useState<{[key: string]: any} | undefined>()
+  const [result, setResult] = useState<{[key: string]: any} | undefined>(
+    undefined,
+  )
   const [errorMessage, setErrorMessage] = useState('')
 
   async function run(): Promise<void> {
     setErrorMessage('')
     try {
-      const newResult = await window.ethereum.send(method, params)
-      setResult(newResult)
+      const call = new Promise((resolve, reject) => {
+        window.ethereum
+          .send(method, params)
+          .then((newResult: any) => {
+            setResult(newResult)
+            resolve()
+          })
+          .catch(reject)
+      })
+      const timeout = new Promise((resolve, reject) => {
+        const id = setTimeout(() => {
+          clearTimeout(id)
+          reject(new Error('timeout'))
+        }, 8000)
+      })
+      await Promise.race([call, timeout])
     } catch (error) {
       setErrorMessage(error.message)
     }
@@ -109,7 +125,7 @@ export function RawMethod({method, params, children}: Props): JSX.Element {
       ) : null}
 
       <Result>
-        {errorMessage ? <Error>{errorMessage}</Error> : null}
+        {errorMessage ? <ErrorMessage>{errorMessage}</ErrorMessage> : null}
         {typeof result !== 'undefined' ? (
           <pre>{JSON.stringify(result, null, 2)}</pre>
         ) : null}
@@ -144,7 +160,7 @@ const Result = styled.div`
   padding: 0 ${Size.Margin16}px;
 `
 
-const Error = styled.div`
+const ErrorMessage = styled.div`
   color ${({theme}): string => theme.color.error};
 `
 
