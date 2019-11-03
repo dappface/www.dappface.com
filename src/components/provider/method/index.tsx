@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useCallback, useMemo} from 'react'
 import styled from 'styled-components'
 
 import {Size} from '../../../const'
@@ -24,7 +24,7 @@ export function Method({id}: Props): JSX.Element {
   } = useSandboxContext()
   const method = useSandboxSelector(getMethodFactory(id))
   const params = useSandboxSelector(getParams(method.id))
-  const {submit, isSubmitting, result, errorMessage} = useSubmitter(
+  const {submit, isSubmitting, result, errorMessage, submitText} = useSubmitter(
     method,
     params,
   )
@@ -47,7 +47,7 @@ export function Method({id}: Props): JSX.Element {
       </ParamsContainer>
 
       <RunContainer>
-        {isSubmitting ? '...' : <input type='submit' value='Run' />}
+        {isSubmitting ? '...' : <input type='submit' value={submitText} />}
       </RunContainer>
 
       <Result>

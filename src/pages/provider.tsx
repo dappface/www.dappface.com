@@ -10,7 +10,7 @@ import {Size} from '../const'
 export default function({location}: PageRendererProps): JSX.Element {
   return (
     <Layout location={location}>
-      <SEO title='Ethereum ' />
+      <SEO title='Ethereum Sandbox' />
       <Container>
         <Header>Ethereum Sandbox</Header>
 
