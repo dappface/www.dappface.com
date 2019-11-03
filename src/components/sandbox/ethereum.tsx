@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import {Size} from '../../const'
 import {SandboxProvider, useSandboxContextValue, getMethodIds} from './context'
 import {Method} from './method'
+import {Reference} from './reference'
 
 export function EthereumSandbox(): JSX.Element {
   const value = useSandboxContextValue()
@@ -12,11 +13,14 @@ export function EthereumSandbox(): JSX.Element {
   return (
     <SandboxProvider value={value}>
       <Container>
+        <Reference />
+
         {methodIds.map(
           (id): JSX.Element => (
             <Method key={id} id={id} />
           ),
         )}
+
         <button
           type='button'
           onClick={(): void => {

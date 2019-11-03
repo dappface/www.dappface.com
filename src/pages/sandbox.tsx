@@ -3,7 +3,7 @@ import {PageRendererProps} from 'gatsby'
 import styled from 'styled-components'
 
 import {Layout} from '../components/layout'
-import {EthereumSandbox} from '../components/provider'
+import {EthereumSandbox} from '../components/sandbox'
 import {SEO} from '../components/seo'
 import {Size} from '../const'
 

@@ -9,6 +9,10 @@ const HEADER_NAV_LINKS = [
     name: 'Contact',
     path: '/contact',
   },
+  {
+    name: 'Sandbox',
+    path: '/sandbox',
+  },
 ]
 
 interface Props {
