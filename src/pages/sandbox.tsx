@@ -12,8 +12,7 @@ export default function({location}: PageRendererProps): JSX.Element {
     <Layout location={location}>
       <SEO
         title='Ethereum Sandbox'
-        description='A place to easily play around with Ethereum JSON-RPC. This is a good place to test your provider and connected remote node.'
-        // description='A sandbox page to interact with an injected Ethereum provider and its connected remote node.'
+        description='A place to easily play around with Ethereum JSON-RPC. This is a good place to test your EIP-1193 compatible ethereum provider and its connected remote node.'
       />
       <Container>
         <Header>Ethereum Sandbox</Header>
