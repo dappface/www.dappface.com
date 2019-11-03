@@ -20,7 +20,7 @@ export function Method({id}: Props): JSX.Element {
   const {
     onChangeMethodFactory,
     removeMethodFactory,
-    addParamFactory,
+    addParam,
   } = useSandboxContext()
   const method = useSandboxSelector(getMethodFactory(id))
   const params = useSandboxSelector(getParams(method.id))
@@ -41,7 +41,7 @@ export function Method({id}: Props): JSX.Element {
         {method.paramIds.map(paramId => (
           <Param key={paramId} id={paramId} />
         ))}
-        <button type='button' onClick={() => addParamFactory(method)}>
+        <button type='button' onClick={() => addParam(method)}>
           + Param
         </button>
       </ParamsContainer>

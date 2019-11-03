@@ -1,13 +1,28 @@
-import {createContext, useCallback, useContext, useReducer} from 'react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useReducer,
+} from 'react'
 import {createSelector} from 'reselect'
 import uuid from 'uuid/v4'
 
 interface State {
   methodIds: string[]
   entities: {
-    methods: {[key: string]: MethodEntity}
-    params: {[key: string]: ParamEntity}
+    methods: NormalizedMethods
+    params: NormalizedParams
   }
+}
+
+interface NormalizedMethods {
+  [key: string]: MethodEntity
+}
+
+interface NormalizedParams {
+  [key: string]: ParamEntity
 }
 
 export interface MethodEntity {
@@ -30,12 +45,18 @@ export function useSandboxContext(): SandboxContextValue {
 }
 
 enum ActionType {
+  SetState,
   AddMethodId,
   RemoveMethodId,
   SetMethod,
   SetParam,
   RemoveMethod,
   RemoveParam,
+}
+
+interface SetState {
+  type: ActionType.SetState
+  payload: {state: State}
 }
 
 interface AddMethodId {
@@ -69,6 +90,7 @@ interface RemoveParam {
 }
 
 type Actions =
+  | SetState
   | AddMethodId
   | RemoveMethodId
   | SetMethod
@@ -78,6 +100,8 @@ type Actions =
 
 function reducer(state: State, action: Actions): State {
   switch (action.type) {
+    case ActionType.SetState:
+      return action.payload.state
     case ActionType.AddMethodId:
       return {...state, methodIds: [...state.methodIds, action.payload.id]}
     case ActionType.RemoveMethodId:
@@ -144,7 +168,7 @@ interface SandboxContextValue {
   onChangeMethodFactory: (
     method: MethodEntity,
   ) => (e: React.ChangeEvent<HTMLInputElement>) => void
-  addParamFactory: (method: MethodEntity) => (value?: string) => void
+  addParam: (method: MethodEntity, value?: string) => void
   removeParamFactory: (param: ParamEntity) => () => void
   onChangeParamFactory: (
     param: ParamEntity,
@@ -174,7 +198,7 @@ export function useSandboxContextValue(): SandboxContextValue {
 
       if (params) {
         params.map(value => {
-          addParamFactory(method)(value)
+          addParam(method, value)
         })
       }
     },
@@ -203,8 +227,8 @@ export function useSandboxContextValue(): SandboxContextValue {
     [state],
   )
 
-  const addParamFactory = useCallback<SandboxContextValue['addParamFactory']>(
-    method => (value?: string): void => {
+  const addParam = useCallback<SandboxContextValue['addParam']>(
+    (method, value): void => {
       const param: ParamEntity = {
         id: uuid(),
         value: value || '',
@@ -243,14 +267,43 @@ export function useSandboxContextValue(): SandboxContextValue {
     [state],
   )
 
+  const counter = useRef(0)
+
+  useEffect(() => {
+    if (counter.current === 0) {
+      counter.current = 1
+      return
+    }
+    window.localStorage.setItem('sandboxState', JSON.stringify(state))
+  }, [state])
+
+  useEffect(() => {
+    const savedStateStr = window.localStorage.getItem('sandboxState')
+    const savedState: State | undefined =
+      savedStateStr !== null ? JSON.parse(savedStateStr) : undefined
+    if (savedState) {
+      dispatch(setStateAction(savedState))
+    }
+    if (!savedState || savedState.methodIds.length === 0) {
+      addMethod('eth_accounts')
+    }
+  }, [])
+
   return {
     state,
     addMethod,
     removeMethodFactory,
     onChangeMethodFactory,
-    addParamFactory,
+    addParam,
     removeParamFactory,
     onChangeParamFactory,
+  }
+}
+
+function setStateAction(state: State): SetState {
+  return {
+    type: ActionType.SetState,
+    payload: {state},
   }
 }
 
@@ -304,15 +357,22 @@ export function getMethodFactory(id: string) {
   return (state: State): MethodEntity => state.entities.methods[id]
 }
 
+function getNormalizedParams(state: State): NormalizedParams {
+  return state.entities.params
+}
+
 export function getParamFactory(id: string) {
-  return (state: State): ParamEntity => state.entities.params[id]
+  return createSelector(
+    getNormalizedParams,
+    (params: NormalizedParams): ParamEntity => params[id],
+  )
 }
 
 export function getParams(methodId: string) {
   return createSelector(
     getMethodFactory(methodId),
-    (method: MethodEntity): ParamEntity[] => {
-      return method.paramIds.map(getParamFactory)
-    },
+    getNormalizedParams,
+    (method: MethodEntity, params: NormalizedParams): ParamEntity[] =>
+      method.paramIds.map(id => params[id]),
   )
 }

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 import {Size} from '../../const'
@@ -8,13 +8,6 @@ import {Method} from './method'
 export function EthereumSandbox(): JSX.Element {
   const value = useSandboxContextValue()
   const methodIds = getMethodIds(value.state)
-
-  useEffect(() => {
-    if (methodIds.length > 0) {
-      return
-    }
-    value.addMethod('eth_accounts')
-  }, [])
 
   return (
     <SandboxProvider value={value}>
