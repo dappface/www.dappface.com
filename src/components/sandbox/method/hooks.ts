@@ -42,6 +42,7 @@ export function useSubmitter(
     e.preventDefault()
     setIsSubmitting(true)
     setErrorMessage('')
+    setResult(undefined)
 
     try {
       if (method.value.split('_')[1] === 'subscribe') {
