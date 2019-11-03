@@ -98,7 +98,7 @@ const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
     margin: 0;
   }
 
-  div {
+  * {
     box-sizing: border-box;
   }
 `
