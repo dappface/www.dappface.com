@@ -52,12 +52,11 @@ const ReferenceList = styled.div`
   justify-content: center;
 
   > div:not(:last-child) {
-    border-right: 1px solid ${({theme}) => theme.color.medium};
+    border-right: 1px solid ${({theme}): string => theme.color.medium};
   }
 `
 
 const Item = styled.div`
-  // border-right: 1px solid ${({theme}) => theme.color.medium};
   > a {
     padding: 0 ${Size.Margin16}px;
   }
