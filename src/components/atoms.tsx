@@ -9,8 +9,13 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 export function InputField({onClose, ...inputProps}: Props): JSX.Element {
   return (
     <Container>
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <Input type='text' {...inputProps} />
+      <Input
+        type='text'
+        autoCapitalize='off'
+        autoComplete='off'
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...inputProps}
+      />
       {onClose ? (
         <RemoveButton type='button' onClick={onClose}>
           <IoMdClose />
