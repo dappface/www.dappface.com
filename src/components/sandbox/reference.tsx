@@ -6,7 +6,7 @@ import {Size} from '../../const'
 export function Reference(): JSX.Element {
   return (
     <Container>
-      <h4>Docs</h4>
+      <h4>JSON-RPC Docs</h4>
       <ReferenceList>
         <Item>
           <a
