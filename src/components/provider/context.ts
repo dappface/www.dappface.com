@@ -22,14 +22,6 @@ export interface ParamEntity {
   methodId: string
 }
 
-const initialState: State = {
-  methodIds: [],
-  entities: {
-    methods: {},
-    params: {},
-  },
-}
-
 const SandboxContext = createContext<SandboxContextValue | undefined>(undefined)
 export const {Provider: SandboxProvider} = SandboxContext
 
@@ -147,12 +139,12 @@ export function useSandboxSelector<T = any>(selector: (state: State) => T): T {
 
 interface SandboxContextValue {
   state: State
-  addMethod: () => void
+  addMethod: (name?: string, params?: string[]) => void
   removeMethodFactory: (method: MethodEntity) => () => void
   onChangeMethodFactory: (
     method: MethodEntity,
   ) => (e: React.ChangeEvent<HTMLInputElement>) => void
-  addParamFactory: (method: MethodEntity) => () => void
+  addParamFactory: (method: MethodEntity) => (value?: string) => void
   removeParamFactory: (param: ParamEntity) => () => void
   onChangeParamFactory: (
     param: ParamEntity,
@@ -160,17 +152,34 @@ interface SandboxContextValue {
 }
 
 export function useSandboxContextValue(): SandboxContextValue {
+  const initialState: State = {
+    methodIds: [],
+    entities: {
+      methods: {},
+      params: {},
+    },
+  }
+
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  const addMethod = useCallback<SandboxContextValue['addMethod']>(() => {
-    const method: MethodEntity = {
-      id: uuid(),
-      value: '',
-      paramIds: [],
-    }
-    dispatch(addMethodIdAction(method.id))
-    dispatch(setMethodAction(method))
-  }, [state])
+  const addMethod = useCallback<SandboxContextValue['addMethod']>(
+    (name, params) => {
+      const method: MethodEntity = {
+        id: uuid(),
+        value: name || '',
+        paramIds: [],
+      }
+      dispatch(addMethodIdAction(method.id))
+      dispatch(setMethodAction(method))
+
+      if (params) {
+        params.map(value => {
+          addParamFactory(method)(value)
+        })
+      }
+    },
+    [state],
+  )
 
   const removeMethodFactory = useCallback<
     SandboxContextValue['removeMethodFactory']
@@ -195,10 +204,10 @@ export function useSandboxContextValue(): SandboxContextValue {
   )
 
   const addParamFactory = useCallback<SandboxContextValue['addParamFactory']>(
-    method => (): void => {
+    method => (value?: string): void => {
       const param: ParamEntity = {
         id: uuid(),
-        value: '',
+        value: value || '',
         methodId: method.id,
       }
       dispatch(

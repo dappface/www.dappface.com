@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 import {Size} from '../../../const'
@@ -32,7 +32,7 @@ export function Method({id}: Props): JSX.Element {
   return (
     <Container onSubmit={submit}>
       <InputField
-        placeholder='method name (e.g. eth_accounts)'
+        placeholder='method name'
         onChange={onChangeMethodFactory(method)}
         value={method.value}
         onClose={removeMethodFactory(method)}
@@ -41,7 +41,7 @@ export function Method({id}: Props): JSX.Element {
         {method.paramIds.map(paramId => (
           <Param key={paramId} id={paramId} />
         ))}
-        <button type='button' onClick={addParamFactory(method)}>
+        <button type='button' onClick={() => addParamFactory(method)}>
           + Param
         </button>
       </ParamsContainer>
