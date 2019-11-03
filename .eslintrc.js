@@ -9,16 +9,22 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'prettier'],
   rules: {
-    'react/jsx-filename-extension': ['error', {extensions: ['.js', '.tsx']}],
-    'import/prefer-default-export': 'off',
-    'import/no-unresolved': 'off',
+    '@typescript-eslint/explicit-function-return-type': [
+      'error',
+      {
+        allowHigherOrderFunctions: true,
+      },
+    ],
     '@typescript-eslint/no-unused-vars': ['error', {varsIgnorePattern: '^_'}],
     '@typescript-eslint/no-use-before-define': 'off',
-    'no-use-before-define': 'off',
+    'import/no-unresolved': 'off',
+    'import/prefer-default-export': 'off',
     'no-underscore-dangle': [
       'off',
       {allow: ['__theme', '__onThemeChange', '__setPreferredTheme']},
     ],
+    'no-use-before-define': 'off',
+    'react/jsx-filename-extension': ['error', {extensions: ['.js', '.tsx']}],
   },
   globals: {
     window: false,

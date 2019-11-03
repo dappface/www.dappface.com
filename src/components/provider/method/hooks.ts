@@ -2,19 +2,32 @@ import {useEffect, useMemo, useRef, useState} from 'react'
 
 import {MethodEntity, ParamEntity} from '../context'
 
-export function useSubmitter(method: MethodEntity, params: ParamEntity[]) {
+interface Submitter {
+  submitText: string
+  submit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [result, setResult] = useState<{[key: string]: any} | undefined>(
-    undefined,
+  result: {[key: string]: any} | undefined
+  errorMessage: string
+  isSubmitting: boolean
+}
+
+export function useSubmitter(
+  method: MethodEntity,
+  params: ParamEntity[],
+): Submitter {
+  const [result, setResult] = useState<Submitter['result']>(undefined)
+  const [errorMessage, setErrorMessage] = useState<Submitter['errorMessage']>(
+    '',
   )
-  const [errorMessage, setErrorMessage] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState<Submitter['isSubmitting']>(
+    false,
+  )
   const {subscriptionId, subscribe, unsubscribe} = useSubscription(
     setResult,
     setErrorMessage,
   )
 
-  const submitText = useMemo(() => {
+  const submitText = useMemo<Submitter['submitText']>(() => {
     if (method.value.split('_')[1] === 'subscribe') {
       if (subscriptionId) {
         return 'Unsubscribe'
@@ -43,7 +56,8 @@ export function useSubmitter(method: MethodEntity, params: ParamEntity[]) {
       const call = new Promise((resolve, reject) => {
         window.ethereum
           .send(method.value, params.map(({value}) => value))
-          .then((newResult: any) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .then((newResult: any): void => {
             setResult(newResult)
             resolve()
           })
@@ -72,13 +86,20 @@ export function useSubmitter(method: MethodEntity, params: ParamEntity[]) {
   }
 }
 
+interface Subscription {
+  subscriptionId: string | undefined
+  subscribe: () => void
+  unsubscribe: () => void
+}
+
 function useSubscription(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setResult: any,
   setErrorMessage: (error: string) => void,
-) {
-  const [subscriptionId, setSubscriptionId] = useState<string | undefined>(
-    undefined,
-  )
+): Subscription {
+  const [subscriptionId, setSubscriptionId] = useState<
+    Subscription['subscriptionId']
+  >(undefined)
 
   function onNotificationFactory(id: string) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

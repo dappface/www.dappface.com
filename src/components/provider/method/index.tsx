@@ -41,7 +41,11 @@ export function Method({id}: Props): JSX.Element {
         {method.paramIds.map(paramId => (
           <Param key={paramId} id={paramId} />
         ))}
-        <button type='button' onClick={() => addParam(method)}>
+        <button
+          type='button'
+          onClick={(): void => {
+            addParam(method)
+          }}>
           + Param
         </button>
       </ParamsContainer>

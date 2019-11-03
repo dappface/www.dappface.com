@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from 'react'
+
 import {ThemeMode} from '../const'
 
 export function useDarkMode(): {
@@ -54,5 +55,7 @@ declare global {
     __theme: ThemeMode
     __onThemeChange: () => void
     __setPreferredTheme: (mode: ThemeMode) => void
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ethereum?: any
   }
 }

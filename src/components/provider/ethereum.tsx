@@ -12,10 +12,16 @@ export function EthereumSandbox(): JSX.Element {
   return (
     <SandboxProvider value={value}>
       <Container>
-        {methodIds.map(id => (
-          <Method key={id} id={id} />
-        ))}
-        <button type='button' onClick={() => value.addMethod()}>
+        {methodIds.map(
+          (id): JSX.Element => (
+            <Method key={id} id={id} />
+          ),
+        )}
+        <button
+          type='button'
+          onClick={(): void => {
+            value.addMethod()
+          }}>
           + Method
         </button>
       </Container>

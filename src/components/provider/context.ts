@@ -156,7 +156,7 @@ function reducer(state: State, action: Actions): State {
   }
 }
 
-export function useSandboxSelector<T = any>(selector: (state: State) => T): T {
+export function useSandboxSelector<T = {}>(selector: (state: State) => T): T {
   const {state} = useSandboxContext()
   return selector(state)
 }
@@ -197,7 +197,7 @@ export function useSandboxContextValue(): SandboxContextValue {
       dispatch(setMethodAction(method))
 
       if (params) {
-        params.map(value => {
+        params.forEach((value): void => {
           addParam(method, value)
         })
       }
@@ -361,6 +361,7 @@ function getNormalizedParams(state: State): NormalizedParams {
   return state.entities.params
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function getParamFactory(id: string) {
   return createSelector(
     getNormalizedParams,
@@ -368,6 +369,7 @@ export function getParamFactory(id: string) {
   )
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function getParams(methodId: string) {
   return createSelector(
     getMethodFactory(methodId),
