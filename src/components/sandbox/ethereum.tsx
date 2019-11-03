@@ -5,6 +5,7 @@ import {Size} from '../../const'
 import {SandboxProvider, useSandboxContextValue, getMethodIds} from './context'
 import {Method} from './method'
 import {Reference} from './reference'
+import {ChainInfo} from './chain-info'
 
 export function EthereumSandbox(): JSX.Element {
   const value = useSandboxContextValue()
@@ -13,6 +14,7 @@ export function EthereumSandbox(): JSX.Element {
   return (
     <SandboxProvider value={value}>
       <Container>
+        <ChainInfo />
         <Reference />
 
         {methodIds.map(
