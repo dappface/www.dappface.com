@@ -17,7 +17,7 @@ function useChainName(): string {
 
   const chainName = useMemo(() => {
     if (!chainInfo[chainId]) {
-      return ''
+      return '···'
     }
     return chainInfo[chainId].name
   }, [chainId])
