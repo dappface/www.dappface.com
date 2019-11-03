@@ -1,13 +1,19 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {PageRendererProps} from 'gatsby'
 import styled from 'styled-components'
 
 import {Layout} from '../components/layout'
-import {EthereumSandbox} from '../components/sandbox'
+import {EthereumSandbox, NoProvier} from '../components/sandbox'
 import {SEO} from '../components/seo'
 import {Size} from '../const'
 
 export default function({location}: PageRendererProps): JSX.Element {
+  const [hasProvider, setHasProvider] = useState(false)
+
+  useEffect((): void => {
+    setHasProvider(!!window.ethereum)
+  }, [])
+
   return (
     <Layout location={location}>
       <SEO
@@ -18,7 +24,7 @@ export default function({location}: PageRendererProps): JSX.Element {
         <Header>Ethereum Sandbox</Header>
 
         <PlaygroudContainer>
-          <EthereumSandbox />
+          {hasProvider ? <EthereumSandbox /> : <NoProvier />}
         </PlaygroudContainer>
       </Container>
     </Layout>
