@@ -1,26 +1,29 @@
 import React from 'react'
+import styled from 'styled-components'
 
-import {RawMethod, EthGetBalanceMethod, EthSignMethod} from './method'
+import {Size} from '../../const'
+import {SandboxProvider, useSandboxContextValue, getMethodIds} from './context'
+import {Method} from './method'
 
-export function EthereumPlayground(): JSX.Element {
+export function EthereumSandbox(): JSX.Element {
+  const value = useSandboxContextValue()
+  const methodIds = getMethodIds(value.state)
+
   return (
-    <>
-      <div>
-        <h3>Hooked Methods</h3>
-        <div>
-          <RawMethod method='eth_accounts' />
-          <RawMethod method='eth_coinbase' />
-          <EthSignMethod />
-        </div>
-      </div>
-
-      <div>
-        <h3>Methods directly call remote node</h3>
-        <div>
-          <EthGetBalanceMethod />
-          <RawMethod method='eth_subscribe' params={['newHeads']} />
-        </div>
-      </div>
-    </>
+    <SandboxProvider value={value}>
+      <Container>
+        {methodIds.map(id => (
+          <Method key={id} id={id} />
+        ))}
+        <button type='button' onClick={value.addMethod}>
+          + Method
+        </button>
+      </Container>
+    </SandboxProvider>
   )
 }
+
+const Container = styled.div`
+  width: 100%;
+  padding: 0 ${Size.Margin16}px;
+`

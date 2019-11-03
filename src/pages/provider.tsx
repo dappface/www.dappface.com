@@ -3,19 +3,19 @@ import {PageRendererProps} from 'gatsby'
 import styled from 'styled-components'
 
 import {Layout} from '../components/layout'
-import {EthereumPlayground} from '../components/provider/ethereum'
+import {EthereumSandbox} from '../components/provider'
 import {SEO} from '../components/seo'
 import {Size} from '../const'
 
 export default function({location}: PageRendererProps): JSX.Element {
   return (
     <Layout location={location}>
-      <SEO title='Ethereum Provider Demo' />
+      <SEO title='Ethereum ' />
       <Container>
-        <Header>Ethereum Provider Demo</Header>
+        <Header>Ethereum Sandbox</Header>
 
         <PlaygroudContainer>
-          <EthereumPlayground />
+          <EthereumSandbox />
         </PlaygroudContainer>
       </Container>
     </Layout>
