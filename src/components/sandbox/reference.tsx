@@ -35,6 +35,15 @@ export function Reference(): JSX.Element {
             Parity
           </a>
         </Item>
+        <Item>
+          <a
+            target='_blank'
+            rel='noopener noreferrer'
+            href='https://metamask.github.io/metamask-docs/API_Reference/JSON_RPC_API'
+            aria-label='Go to MetaMask Docs'>
+            MetaMask
+          </a>
+        </Item>
       </ReferenceList>
     </Container>
   )
