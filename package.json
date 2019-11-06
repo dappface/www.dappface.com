@@ -12,6 +12,7 @@
     "upgrade-interactive": "npx npm-check --update"
   },
   "dependencies": {
+    "@dappface/ethereum-provider": "0.0.1",
     "babel-plugin-styled-components": "^1.10.6",
     "ethers": "^4.0.39",
     "gatsby": "^2.16.5",

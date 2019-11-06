@@ -1,11 +1,12 @@
+import {IEthereumProvider} from '@dappface/ethereum-provider'
 import {createContext, useContext, useEffect, useState} from 'react'
 
 const EthereumContext = createContext(undefined)
 
 export const {Provider: EthereumProvider} = EthereumContext
 
-export function useInitEthereum(): any | undefined {
-  const [ethereum, setEthereum] = useState<any | undefined>()
+export function useInitEthereum(): IEthereumProvider | undefined {
+  const [ethereum, setEthereum] = useState<IEthereumProvider | undefined>()
 
   useEffect((): void => {
     if (window.ethereum) {
@@ -20,6 +21,7 @@ export function useInitEthereum(): any | undefined {
   return ethereum
 }
 
-export function useEthereum(): any | undefined {
-  return useContext(EthereumContext)
+export function useEthereum(): IEthereumProvider {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return useContext(EthereumContext) as any
 }

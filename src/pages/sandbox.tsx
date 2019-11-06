@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {PageRendererProps} from 'gatsby'
 import styled from 'styled-components'
 
@@ -9,7 +9,6 @@ import {Size} from '../const'
 import {EthereumProvider, useInitEthereum} from '../hooks'
 
 export default function({location}: PageRendererProps): JSX.Element {
-  window.ethereum = undefined
   const ethereum = useInitEthereum()
   return (
     <Layout location={location}>
@@ -22,7 +21,11 @@ export default function({location}: PageRendererProps): JSX.Element {
 
         <EthereumProvider value={ethereum}>
           <PlaygroudContainer>
-            {!!ethereum ? <EthereumSandbox /> : <NoProvider />}
+            {typeof ethereum !== 'undefined' ? (
+              <EthereumSandbox />
+            ) : (
+              <NoProvider />
+            )}
           </PlaygroudContainer>
         </EthereumProvider>
       </Container>
