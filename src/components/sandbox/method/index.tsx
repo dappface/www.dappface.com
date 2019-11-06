@@ -8,7 +8,7 @@ import {
   useSandboxSelector,
   getMethodFactory,
   getParams,
-} from '../context'
+} from '../../../hooks'
 import {useSubmitter} from './hooks'
 import {Param} from './param'
 

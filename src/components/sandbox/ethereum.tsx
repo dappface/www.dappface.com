@@ -2,7 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 import {Size} from '../../const'
-import {SandboxProvider, useSandboxContextValue, getMethodIds} from './context'
+import {
+  SandboxProvider,
+  useSandboxContextValue,
+  getMethodIds,
+} from '../../hooks'
 import {Method} from './method'
 import {Reference} from './reference'
 import {ChainInfo} from './chain-info'

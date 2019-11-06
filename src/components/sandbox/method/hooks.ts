@@ -1,6 +1,6 @@
 import {useEffect, useMemo, useRef, useState} from 'react'
 
-import {MethodEntity, ParamEntity} from '../context'
+import {MethodEntity, ParamEntity, useEthereum} from '../../../hooks'
 
 interface Submitter {
   submitText: string
@@ -26,6 +26,7 @@ export function useSubmitter(
     setResult,
     setErrorMessage,
   )
+  const ethereum = useEthereum()
 
   const submitText = useMemo<Submitter['submitText']>(() => {
     if (method.value.split('_')[1] === 'subscribe') {
@@ -55,7 +56,7 @@ export function useSubmitter(
       }
 
       const call = new Promise((resolve, reject) => {
-        window.ethereum
+        ethereum
           .send(method.value, params.map(({value}) => value))
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           .then((newResult: any): void => {
@@ -101,6 +102,7 @@ function useSubscription(
   const [subscriptionId, setSubscriptionId] = useState<
     Subscription['subscriptionId']
   >(undefined)
+  const ethereum = useEthereum()
 
   function onNotificationFactory(id: string) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -122,22 +124,19 @@ function useSubscription(
   const notificationListener = useRef<(result: any) => void>()
 
   async function subscribe(): Promise<void> {
-    const id = await window.ethereum.send('eth_subscribe', ['newHeads'])
+    const id = await ethereum.send('eth_subscribe', ['newHeads'])
     setSubscriptionId(id)
     notificationListener.current = onNotificationFactory(id)
-    window.ethereum.on('notification', notificationListener.current)
+    ethereum.on('notification', notificationListener.current)
   }
 
   async function unsubscribe(): Promise<void> {
     if (!subscriptionId) {
       return
     }
-    await window.ethereum.send('eth_unsubscribe', [subscriptionId])
+    await ethereum.send('eth_unsubscribe', [subscriptionId])
     if (notificationListener.current) {
-      window.ethereum.removeListener(
-        'notification',
-        notificationListener.current,
-      )
+      ethereum.removeListener('notification', notificationListener.current)
     }
     notificationListener.current = undefined
     setSubscriptionId(undefined)
@@ -149,7 +148,7 @@ function useSubscription(
       if (!subscriptionId) {
         return
       }
-      window.ethereum.send('eth_unsubscribe', [subscriptionId])
+      ethereum.send('eth_unsubscribe', [subscriptionId])
     },
     [subscriptionId],
   )

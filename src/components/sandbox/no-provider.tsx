@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export function NoProvier(): JSX.Element {
+export function NoProvider(): JSX.Element {
   return (
     <Container>
       <div>Looks like there is no Ethereum provider injected.</div>
