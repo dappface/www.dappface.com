@@ -1,7 +1,7 @@
 import {IEthereumProvider} from '@dappface/ethereum-provider'
 import {createContext, useContext, useEffect, useState} from 'react'
 
-const EthereumContext = createContext(undefined)
+const EthereumContext = createContext<IEthereumProvider | undefined>(undefined)
 
 export const {Provider: EthereumProvider} = EthereumContext
 
@@ -22,6 +22,5 @@ export function useInitEthereum(): IEthereumProvider | undefined {
 }
 
 export function useEthereum(): IEthereumProvider {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return useContext(EthereumContext) as any
+  return useContext(EthereumContext) as IEthereumProvider
 }

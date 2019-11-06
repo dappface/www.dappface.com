@@ -18,8 +18,9 @@ export default function({location}: PageRendererProps): JSX.Element {
       />
       <Container>
         <Header>Ethereum Sandbox</Header>
+        {typeof ethereum !== 'undefined' && <pre>{Object.keys(ethereum)}</pre>}
 
-        <EthereumProvider value={ethereum}>
+        {/* <EthereumProvider value={ethereum}>
           <PlaygroudContainer>
             {typeof ethereum !== 'undefined' ? (
               <EthereumSandbox />
@@ -27,7 +28,7 @@ export default function({location}: PageRendererProps): JSX.Element {
               <NoProvider />
             )}
           </PlaygroudContainer>
-        </EthereumProvider>
+        </EthereumProvider> */}
       </Container>
     </Layout>
   )
