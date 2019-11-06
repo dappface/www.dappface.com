@@ -18,7 +18,24 @@ export default function({location}: PageRendererProps): JSX.Element {
       />
       <Container>
         <Header>Ethereum Sandbox</Header>
-        {typeof ethereum !== 'undefined' && <pre>{Object.keys(ethereum)}</pre>}
+        {window.ethereum && (
+          <>
+            <div>window.ethereum Properties</div>
+            <pre>{JSON.stringify(Object.keys(window.ethereum), null, 2)}</pre>
+          </>
+        )}
+        {window.web3 && window.web3.currentProvider && (
+          <>
+            <div>window.web3.currentProvider Properties</div>
+            <pre>
+              {JSON.stringify(
+                Object.keys(window.web3.currentProvider),
+                null,
+                2,
+              )}
+            </pre>
+          </>
+        )}
 
         {/* <EthereumProvider value={ethereum}>
           <PlaygroudContainer>
