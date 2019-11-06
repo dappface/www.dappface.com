@@ -8,6 +8,36 @@ import {SEO} from '../components/seo'
 import {Size} from '../const'
 import {EthereumProvider, useInitEthereum} from '../hooks'
 
+function Inspector() {
+  const [hasLoaded, setHasLoaded] = React.useState(false)
+  React.useEffect(() => {
+    setHasLoaded(true)
+  }, [])
+
+  if (!hasLoaded) {
+    return null
+  }
+
+  return (
+    <>
+      {window.ethereum && (
+        <>
+          <div>window.ethereum Properties</div>
+          <pre>{JSON.stringify(Object.keys(window.ethereum), null, 2)}</pre>
+        </>
+      )}
+      {window.web3 && window.web3.currentProvider && (
+        <>
+          <div>window.web3.currentProvider Properties</div>
+          <pre>
+            {JSON.stringify(Object.keys(window.web3.currentProvider), null, 2)}
+          </pre>
+        </>
+      )}
+    </>
+  )
+}
+
 export default function({location}: PageRendererProps): JSX.Element {
   const ethereum = useInitEthereum()
   return (
@@ -18,24 +48,7 @@ export default function({location}: PageRendererProps): JSX.Element {
       />
       <Container>
         <Header>Ethereum Sandbox</Header>
-        {window.ethereum && (
-          <>
-            <div>window.ethereum Properties</div>
-            <pre>{JSON.stringify(Object.keys(window.ethereum), null, 2)}</pre>
-          </>
-        )}
-        {window.web3 && window.web3.currentProvider && (
-          <>
-            <div>window.web3.currentProvider Properties</div>
-            <pre>
-              {JSON.stringify(
-                Object.keys(window.web3.currentProvider),
-                null,
-                2,
-              )}
-            </pre>
-          </>
-        )}
+        <Inspector />
 
         {/* <EthereumProvider value={ethereum}>
           <PlaygroudContainer>
