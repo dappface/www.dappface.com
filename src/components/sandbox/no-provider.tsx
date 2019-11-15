@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import {Size} from '../../const'
+
 export function NoProvider(): JSX.Element {
   return (
     <Container>
@@ -27,6 +29,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
+  padding: 0 ${Size.Margin16}px;
 `
 
 const DocLink = styled.a`

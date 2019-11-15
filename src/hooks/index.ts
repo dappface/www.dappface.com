@@ -13,7 +13,5 @@ declare global {
     __onThemeChange: () => void
     __setPreferredTheme: (mode: ThemeMode) => void
     ethereum?: IEthereumProvider
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    web3?: any
   }
 }
