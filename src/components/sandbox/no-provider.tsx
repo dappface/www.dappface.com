@@ -5,8 +5,8 @@ export function NoProvider(): JSX.Element {
   return (
     <Container>
       <div>
-        Looks like there is no Ethereum provider injected. To Learn more about
-        EIP1193 check out the specification{' '}
+        Looks like there is no Ethereum provider injected. To learn more, check
+        out the EIP1193 specification{' '}
         <DocLink
           target='_blank'
           rel='noopener noreferrer'
