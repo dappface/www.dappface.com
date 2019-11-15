@@ -8,36 +8,6 @@ import {SEO} from '../components/seo'
 import {Size} from '../const'
 import {EthereumProvider, useInitEthereum} from '../hooks'
 
-function Inspector() {
-  const [hasLoaded, setHasLoaded] = React.useState(false)
-  React.useEffect(() => {
-    setHasLoaded(true)
-  }, [])
-
-  if (!hasLoaded) {
-    return null
-  }
-
-  return (
-    <>
-      {window.ethereum && (
-        <>
-          <div>window.ethereum Properties</div>
-          <pre>{JSON.stringify(Object.keys(window.ethereum), null, 2)}</pre>
-        </>
-      )}
-      {window.web3 && window.web3.currentProvider && (
-        <>
-          <div>window.web3.currentProvider Properties</div>
-          <pre>
-            {JSON.stringify(Object.keys(window.web3.currentProvider), null, 2)}
-          </pre>
-        </>
-      )}
-    </>
-  )
-}
-
 export default function({location}: PageRendererProps): JSX.Element {
   const ethereum = useInitEthereum()
   return (
@@ -48,17 +18,16 @@ export default function({location}: PageRendererProps): JSX.Element {
       />
       <Container>
         <Header>Ethereum Sandbox</Header>
-        <Inspector />
 
-        {/* <EthereumProvider value={ethereum}>
-          <PlaygroudContainer>
+        <EthereumProvider value={ethereum}>
+          <PlaygroundContainer>
             {typeof ethereum !== 'undefined' ? (
               <EthereumSandbox />
             ) : (
               <NoProvider />
             )}
-          </PlaygroudContainer>
-        </EthereumProvider> */}
+          </PlaygroundContainer>
+        </EthereumProvider>
       </Container>
     </Layout>
   )
@@ -75,7 +44,7 @@ const Header = styled.h2`
   color: ${({theme}): string => theme.color.high};
 `
 
-const PlaygroudContainer = styled.div`
+const PlaygroundContainer = styled.div`
   max-width: 800px;
   width: 100vw;
   display: flex;

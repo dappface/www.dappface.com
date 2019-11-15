@@ -9,13 +9,10 @@ export function useInitEthereum(): IEthereumProvider | undefined {
   const [ethereum, setEthereum] = useState<IEthereumProvider | undefined>()
 
   useEffect((): void => {
-    if (window.ethereum) {
-      setEthereum(window.ethereum)
+    if (!window.ethereum) {
       return
     }
-    if (window.web3 && window.web3.currentProvider) {
-      setEthereum(window.web3.currentProvider)
-    }
+    setEthereum(window.ethereum)
   }, [])
 
   return ethereum
