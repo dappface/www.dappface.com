@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import {InputField} from '../../atoms'
-import {useSandboxContext, getParamFactory} from '../context'
+import {useSandboxContext, getParamFactory} from '../../../hooks'
 
 interface Props {
   id: string

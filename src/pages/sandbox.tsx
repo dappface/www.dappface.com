@@ -1,19 +1,15 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {PageRendererProps} from 'gatsby'
 import styled from 'styled-components'
 
 import {Layout} from '../components/layout'
-import {EthereumSandbox, NoProvier} from '../components/sandbox'
+import {EthereumSandbox, NoProvider} from '../components/sandbox'
 import {SEO} from '../components/seo'
 import {Size} from '../const'
+import {EthereumProvider, useInitEthereum} from '../hooks'
 
 export default function({location}: PageRendererProps): JSX.Element {
-  const [hasProvider, setHasProvider] = useState(false)
-
-  useEffect((): void => {
-    setHasProvider(!!window.ethereum)
-  }, [])
-
+  const ethereum = useInitEthereum()
   return (
     <Layout location={location}>
       <SEO
@@ -23,9 +19,15 @@ export default function({location}: PageRendererProps): JSX.Element {
       <Container>
         <Header>Ethereum Sandbox</Header>
 
-        <PlaygroudContainer>
-          {hasProvider ? <EthereumSandbox /> : <NoProvier />}
-        </PlaygroudContainer>
+        <EthereumProvider value={ethereum}>
+          <PlaygroundContainer>
+            {typeof ethereum !== 'undefined' ? (
+              <EthereumSandbox />
+            ) : (
+              <NoProvider />
+            )}
+          </PlaygroundContainer>
+        </EthereumProvider>
       </Container>
     </Layout>
   )
@@ -42,7 +44,7 @@ const Header = styled.h2`
   color: ${({theme}): string => theme.color.high};
 `
 
-const PlaygroudContainer = styled.div`
+const PlaygroundContainer = styled.div`
   max-width: 800px;
   width: 100vw;
   display: flex;

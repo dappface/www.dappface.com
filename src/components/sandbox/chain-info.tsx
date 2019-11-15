@@ -1,6 +1,8 @@
 import React, {useEffect, useMemo, useState} from 'react'
 import styled from 'styled-components'
 
+import {useEthereum} from '../../hooks'
+
 export function ChainInfo(): JSX.Element {
   const chainName = useChainName()
   return <Container>{chainName}</Container>
@@ -14,6 +16,7 @@ const Container = styled.div`
 
 function useChainName(): string {
   const [chainId, setChainId] = useState('')
+  const ethereum = useEthereum()
 
   const chainName = useMemo(() => {
     if (!chainInfo[chainId]) {
@@ -24,16 +27,16 @@ function useChainName(): string {
 
   useEffect(() => {
     ;(async (): Promise<void> => {
-      const res = await window.ethereum.send('eth_chainId')
+      const res = await ethereum.send('eth_chainId')
       setChainId(res.result)
     })()
   }, [])
 
   useEffect(() => {
-    window.ethereum.on('chainChanged', setChainId)
+    ethereum.on('chainChanged', setChainId)
 
     return (): void => {
-      window.ethereum.removeListener('chainChanged', setChainId)
+      ethereum.removeListener('chainChanged', setChainId)
     }
   }, [])
 
